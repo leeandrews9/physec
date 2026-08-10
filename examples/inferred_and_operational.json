@@ -1,0 +1,98 @@
+[
+  {
+    "_comment": "Tailgate. No PACS on earth emits this natively — it is always inferred. The schema forces the producer to declare HOW, and to attach a confidence. That is the difference between a defensible metric and a marketing claim.",
+    "class_uid": 4230001,
+    "category_uid": 4230,
+    "activity_id": 10,
+    "type_uid": 423000110,
+    "severity_id": 3,
+    "lifecycle_id": 1,
+    "time": 1786650912000,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "correlation_uid": "evt-2026-0214-f77b"
+    },
+    "derivation_id": 4,
+    "confidence_pct": 88,
+    "site_uid": "SITE-0417",
+    "building": "DC-2",
+    "signal_code": {
+      "onvif_topic": "tns1:AccessControl/AccessTaken/Credential",
+      "native_type": "ACCESS_GRANTED"
+    },
+    "portal": {
+      "uid": "DR-2-014",
+      "name": "DC-2 loading dock personnel door",
+      "portal_type_id": 1,
+      "portal_mode": "Accessed",
+      "portal_physical_state": "Open",
+      "zone": { "uid": "Z-DOCK-2", "name": "Dock 2", "zone_type_id": 3 }
+    },
+    "credential": {
+      "uid": "CRD-8f21e4a0",
+      "credential_type_id": 1,
+      "user": { "uid": "EMP-20714", "name": "contractor-badge-8f21" }
+    },
+    "message": "One grant, two door-contact transitions within 4.2 seconds. Second transit unattributed."
+  },
+  {
+    "_comment": "Coverage gap. This is the labor-economics record. No standard exists for it anywhere — and it is exactly the data that lets you compare the cost and reliability of a human post against an automated one.",
+    "class_uid": 4230005,
+    "category_uid": 4230,
+    "activity_id": 9,
+    "type_uid": 423000509,
+    "severity_id": 3,
+    "time": 1786662000000,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"]
+    },
+    "derivation_id": 5,
+    "site_uid": "SITE-0417",
+    "post": {
+      "uid": "POST-0417-GH1",
+      "name": "Main gatehouse",
+      "post_type_id": 3,
+      "zone": { "uid": "Z-ENTRY", "name": "Main entry", "zone_type_id": 5 }
+    },
+    "scheduled_start_time": 1786662000000,
+    "variance": 2760000,
+    "duration": 2760000,
+    "is_billable": false,
+    "message": "Gatehouse unstaffed 46 minutes between scheduled relief and actual arrival."
+  },
+  {
+    "_comment": "Missed checkpoint. Same pattern: entirely proprietary today, one shape per vendor. Note position_accuracy and geofence_status — without them, patrol data cannot be audited.",
+    "class_uid": 4230004,
+    "category_uid": 4230,
+    "activity_id": 6,
+    "type_uid": 423000406,
+    "severity_id": 2,
+    "time": 1786668420000,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"]
+    },
+    "derivation_id": 5,
+    "site_uid": "SITE-0417",
+    "patrol_tour": {
+      "uid": "TOUR-NIGHT-B",
+      "name": "Night interior round B",
+      "checkpoint_expected_count": 14,
+      "scheduled_start_time": 1786666800000
+    },
+    "checkpoint": {
+      "uid": "CP-2-ROOF",
+      "name": "DC-2 roof access",
+      "checkpoint_token_type": "NFC",
+      "location": { "site_uid": "SITE-0417", "building": "DC-2", "floor": "R" }
+    },
+    "checkpoint_count": 11,
+    "post": { "uid": "POST-0417-R1", "name": "Roving 1", "post_type_id": 2 },
+    "message": "Roof access checkpoint not registered on night round B."
+  }
+]

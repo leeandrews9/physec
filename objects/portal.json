@@ -1,0 +1,28 @@
+{
+  "caption": "Portal",
+  "description": "The Portal object describes a controlled opening such as a door, gate, turnstile, or barrier, together with its commanded and observed state.",
+  "extends": "_entity",
+  "name": "portal",
+  "observable": 42001,
+  "attributes": {
+    "portal_type_id": {
+      "group": "classification",
+      "requirement": "required"
+    },
+    "portal_type": {
+      "requirement": "optional"
+    },
+    "portal_mode": {
+      "requirement": "recommended"
+    },
+    "portal_physical_state": {
+      "requirement": "recommended"
+    },
+    "zone": {
+      "requirement": "recommended"
+    },
+    "location": {
+      "requirement": "optional"
+    }
+  }
+}

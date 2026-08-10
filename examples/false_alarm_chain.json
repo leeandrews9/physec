@@ -1,0 +1,110 @@
+[
+  {
+    "_comment": "1 of 3 — Raw signal. A perimeter beam trips at 02:14. This is what every alarm system in the world already emits, normalized and crosswalked to the codes the panel actually sent.",
+    "class_uid": 4230002,
+    "category_uid": 4230,
+    "activity_id": 2,
+    "type_uid": 423000202,
+    "severity_id": 3,
+    "lifecycle_id": 1,
+    "time": 1786622040000,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "correlation_uid": "evt-2026-0214-a91f"
+    },
+    "signal_code": {
+      "sia_dc03_code": "BA",
+      "contact_id_code": "131",
+      "contact_id_qualifier": "1",
+      "native_type": "PERIM_BEAM_W_FENCE_3"
+    },
+    "derivation_id": 1,
+    "site_uid": "SITE-0417",
+    "site_name": "Inland Empire Distribution Center",
+    "alarm_point": {
+      "uid": "AP-W-FENCE-03",
+      "name": "West fence beam 3",
+      "sensor_type": "beam",
+      "is_armed": true,
+      "zone": { "uid": "Z-PERIM-W", "name": "West perimeter", "zone_type_id": 1 }
+    },
+    "message": "Perimeter beam activation, west fence segment 3."
+  },
+  {
+    "_comment": "2 of 3 — Disposition. An operator pulls the camera, sees a coyote, and closes it. THIS is the record that does not exist in any system today. Level 0 + cause 7 + no dispatch, with the latency attached.",
+    "class_uid": 4230003,
+    "category_uid": 4230,
+    "activity_id": 1,
+    "type_uid": 423000301,
+    "severity_id": 1,
+    "time": 1786622094000,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "correlation_uid": "evt-2026-0214-a91f"
+    },
+    "site_uid": "SITE-0417",
+    "alarm_point": { "uid": "AP-W-FENCE-03", "name": "West fence beam 3" },
+    "disposition": {
+      "validation_level_id": 1,
+      "verification_method_id": 6,
+      "cause_id": 7,
+      "dispatch_outcome_id": 1,
+      "time_to_triage": 54000,
+      "time_to_resolution": 54000
+    },
+    "derivation_id": 6,
+    "message": "Video review: single coyote transiting the fence line. No human presence. Cleared without dispatch."
+  },
+  {
+    "_comment": "3 of 3 — The counterfactual. Same beam, same night, different outcome. Two persons on camera cutting fence: Level 3, dispatched, on scene in 6m41s. Same correlation pattern, opposite label.",
+    "class_uid": 4230003,
+    "category_uid": 4230,
+    "activity_id": 2,
+    "type_uid": 423000302,
+    "severity_id": 4,
+    "time": 1786636331000,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "correlation_uid": "evt-2026-0214-c02d"
+    },
+    "site_uid": "SITE-0417",
+    "alarm_point": { "uid": "AP-W-FENCE-03", "name": "West fence beam 3" },
+    "disposition": {
+      "validation_level_id": 4,
+      "verification_method_id": 6,
+      "cause_id": 1,
+      "dispatch_outcome_id": 4,
+      "time_to_triage": 31000,
+      "time_to_resolution": 1844000
+    },
+    "response_resource": [
+      {
+        "uid": "RR-MP-14",
+        "name": "Mobile patrol unit 14",
+        "resource_type_id": 2,
+        "assigned_time": 1786636362000,
+        "enroute_time": 1786636371000,
+        "on_scene_time": 1786636762000,
+        "cleared_time": 1786638175000
+      },
+      {
+        "uid": "RR-LE-RSO",
+        "name": "County sheriff",
+        "resource_type_id": 7,
+        "assigned_time": 1786636401000,
+        "on_scene_time": 1786636944000
+      }
+    ],
+    "urgency_id": 1,
+    "certainty_id": 1,
+    "response_type_id": 4,
+    "derivation_id": 6,
+    "message": "Video review: two persons cutting fence fabric. Threat to property confirmed. Mobile patrol and law enforcement dispatched."
+  }
+]

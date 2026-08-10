@@ -1,0 +1,19 @@
+{
+  "caption": "Geo Location",
+  "description": "Adds physical site context to the core Geo Location object.",
+  "extends": "location",
+  "attributes": {
+    "site_uid": {
+      "requirement": "optional"
+    },
+    "site_name": {
+      "requirement": "optional"
+    },
+    "building": {
+      "requirement": "optional"
+    },
+    "floor": {
+      "requirement": "optional"
+    }
+  }
+}

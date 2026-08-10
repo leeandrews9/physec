@@ -1,0 +1,23 @@
+{
+  "caption": "Physical Site",
+  "description": "The Physical Site profile adds physical location context to any event class. Applying it to core Identity and Access Management or Authentication classes allows logical access events to be correlated with physical presence at the same site.",
+  "meta": "profile",
+  "name": "physical_site",
+  "attributes": {
+    "site_uid": {
+      "requirement": "recommended"
+    },
+    "site_name": {
+      "requirement": "optional"
+    },
+    "building": {
+      "requirement": "optional"
+    },
+    "floor": {
+      "requirement": "optional"
+    },
+    "zone": {
+      "requirement": "optional"
+    }
+  }
+}

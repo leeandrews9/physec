@@ -1,0 +1,22 @@
+{
+  "caption": "Zone",
+  "description": "The Zone object describes a security zone or area within a site.",
+  "extends": "_entity",
+  "name": "zone",
+  "observable": 42003,
+  "attributes": {
+    "zone_type_id": {
+      "group": "classification",
+      "requirement": "recommended"
+    },
+    "zone_type": {
+      "requirement": "optional"
+    },
+    "is_armed": {
+      "requirement": "optional"
+    },
+    "location": {
+      "requirement": "optional"
+    }
+  }
+}

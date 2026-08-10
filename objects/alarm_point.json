@@ -1,0 +1,21 @@
+{
+  "caption": "Alarm Point",
+  "description": "The Alarm Point object describes a monitored detection point, such as a contact, motion sensor, or beam, and the panel or device that supervises it.",
+  "extends": "_entity",
+  "name": "alarm_point",
+  "observable": 42004,
+  "attributes": {
+    "sensor_type": {
+      "requirement": "recommended"
+    },
+    "is_armed": {
+      "requirement": "recommended"
+    },
+    "zone": {
+      "requirement": "recommended"
+    },
+    "device": {
+      "requirement": "optional"
+    }
+  }
+}

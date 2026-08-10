@@ -1,0 +1,7 @@
+{
+  "uid": 42,
+  "caption": "Physical Security",
+  "description": "The Physical Security extension defines event classes and objects for physical security operations, covering access control, alarm signalling and disposition, guard patrols, post staffing, response dispatch, and incident reporting. Event identifiers are crosswalked to established vocabularies including the SIA DC-03 format, the Ademco Contact ID protocol, ONVIF topic namespaces, and the ANSI/TMA AVS-01 alarm validation score.",
+  "name": "physec",
+  "version": "0.1.0"
+}

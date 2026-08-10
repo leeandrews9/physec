@@ -1,0 +1,18 @@
+{
+  "caption": "Checkpoint",
+  "description": "The Checkpoint object describes a location a patrol is expected to visit and register, together with the token technology used to prove presence.",
+  "extends": "_entity",
+  "name": "checkpoint",
+  "observable": 42006,
+  "attributes": {
+    "checkpoint_token_type": {
+      "requirement": "recommended"
+    },
+    "zone": {
+      "requirement": "optional"
+    },
+    "location": {
+      "requirement": "recommended"
+    }
+  }
+}
