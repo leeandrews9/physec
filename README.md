@@ -1,6 +1,6 @@
 # physec — an OCSF extension for physical security operations
 
-**v0.1.0 · draft · not yet submitted to OCSF**
+**v0.1.0 · draft · proposed to the OCSF community** (uid reservation: [ocsf/ocsf-schema#1723](https://github.com/ocsf/ocsf-schema/pull/1723); core-category vs public-extension placement under community discussion)
 
 `physec` is an open event schema for physical security operations: access control decisions, alarm signals and their disposition, guard patrols, post staffing, response dispatch, and incident reports. As of v0.1 the required `incident_type_common` attribute is backed by a [published 24-value controlled vocabulary](vocabularies/incident_type_common.md) derived from a live production taxonomy.
 
@@ -65,6 +65,36 @@ So the layer where a security operation actually runs — *what was reported, wh
 **Nine objects:** `portal`, `credential`, `zone`, `alarm_point`, `post`, `checkpoint`, `patrol_tour`, `response_resource`, `disposition`, `signal_code`. Core OCSF `location`, `device`, `user`, `ldap_person`, `organization`, and `actor` are reused rather than duplicated; `location` is patched with site/building/floor.
 
 **One profile:** `physical_site`. Being a profile rather than a class attribute means it can be applied to core IAM and Authentication classes, so a badge-in and a network logon at the same site correlate. That is the physical/logical convergence case, and it's the reason to build on OCSF rather than standalone.
+
+## Relationship to OCSF core
+
+Guidance from the OCSF community call of 2026-08-18 shaped this section.
+
+**Findings stay in core.** This extension deliberately defines **no finding
+classes**. A physical detection — "camera alarm + missed checkpoint + cut
+fence = someone got through" — belongs in the core **Findings** category,
+built the way core findings are built: the physec activity events become the
+finding's `related_events`, and the finding carries the verdict and case
+metadata. A new category is not needed for a finding just because it is
+physically based; what needs the category is the **activities a finding is
+made of**, which no existing category models.
+
+**Convergence rides the profile.** `physical_site` applied to core IAM and
+Authentication classes is the correlation mechanism: a string of failed
+logons and a break-in at the same site three days later join on the same
+site and actor objects — no translation layer.
+
+**Packaging is negotiable; the four novel classes are the substance.**
+Alarm Disposition, Patrol, Post Staffing, and Response Activity have no
+machine-readable standard anywhere — they are the proposal. The two interop
+classes (Physical Access, Alarm Signal) cover ground ONVIF and SIA already
+own and could just as well land as core additions if the community prefers
+a leaner category. Where physec's `disposition` object overlaps core
+security-control disposition semantics, it maps onto them — and extends
+them with the alarm-industry vocabularies core lacks (AVS-01 validation
+levels, CS-V-01 verification methods, false-alarm causes, dispatch
+outcomes). Whether this ships as a core category or a public extension is
+the community's call; the schema content is the proposal either way.
 
 ## Validate
 
