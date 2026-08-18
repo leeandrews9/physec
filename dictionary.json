@@ -780,7 +780,7 @@
     },
     "incident_type_common": {
       "caption": "Common Incident Type",
-      "description": "The incident type drawn from the controlled vocabulary published by this extension. Required so that locally defined types remain comparable across organizations.",
+      "description": "The incident type drawn from the controlled vocabulary published by this extension (<code>vocabularies/incident_type_common.json</code>, 24 values, v0.1.0). Required so that locally defined types remain comparable across organizations.",
       "type": "string_t"
     },
     "incident_type_internal": {

@@ -1,0 +1,40 @@
+name: validate
+
+# Validates this extension against the upstream OCSF schema on every push and PR.
+on:
+  push:
+  pull_request:
+
+jobs:
+  ocsf-validate:
+    # ocsf-validator has a Windows path-separator bug (backslashes defeat
+    # type detection), so this MUST run on a POSIX runner. Do not switch
+    # this to windows-latest.
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out physec
+        uses: actions/checkout@v4
+        with:
+          path: physec
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Shallow-clone ocsf-schema
+        run: git clone --depth 1 https://github.com/ocsf/ocsf-schema.git
+
+      - name: Graft physec into extensions/
+        run: |
+          mkdir -p ocsf-schema/extensions/physec
+          rsync -a --exclude='.git' --exclude='.github' physec/ ocsf-schema/extensions/physec/
+
+      - name: Install ocsf-validator
+        # Intentionally unpinned: the point of this job is validating physec
+        # against the moving upstream schema/validator, not a frozen version.
+        # A red run here signals upstream drift worth knowing about.
+        run: pip install ocsf-validator
+
+      - name: Run OCSF validator
+        run: python -m ocsf_validator ocsf-schema

@@ -1,0 +1,175 @@
+[
+  {
+    "_comment": "1 of 6 — SYNTHETIC example — invented site, times, and identifiers; no operational data. This file walks one night at a fictional logistics yard through the four operational classes no standard covers: a missed patrol checkpoint, a late post arrival, and a trespass episode from report through response to disposition (events 3-6 share a correlation_uid). Here: the overnight tour's 22:00 run never registered checkpoint 4 — derived by schedule correlation, not observed by a device.",
+    "class_uid": 4230004,
+    "category_uid": 4230,
+    "activity_id": 6,
+    "activity_name": "Checkpoint Missed",
+    "type_uid": 423000406,
+    "severity_id": 2,
+    "time": 1773550020000,
+    "derivation_id": 5,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "uid": "sessmiss-88121-cp-ny-04"
+    },
+    "site_uid": "SITE-0042",
+    "site_name": "Harborview Logistics Park",
+    "patrol_tour": { "uid": "tour-nyp", "name": "North Yard Perimeter" },
+    "checkpoint": {
+      "uid": "cp-ny-04",
+      "name": "North Yard Dock 4",
+      "location": { "site_uid": "SITE-0042", "site_name": "Harborview Logistics Park" }
+    },
+    "actor": { "user": { "uid": "usr-3241" } }
+  },
+  {
+    "_comment": "2 of 6 — SYNTHETIC example — invented site, times, and identifiers; no operational data. The relieving officer reaches the South Gatehouse 45 minutes after the scheduled 22:00 start: a Late Arrival with the signed variance in milliseconds, backed by a clock punch (derivation Direct). The post object carries its required post_type_id.",
+    "class_uid": 4230005,
+    "category_uid": 4230,
+    "activity_id": 3,
+    "activity_name": "Late Arrival",
+    "type_uid": 423000503,
+    "severity_id": 2,
+    "time": 1773553500000,
+    "derivation_id": 1,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "uid": "shift-204418"
+    },
+    "site_uid": "SITE-0042",
+    "site_name": "Harborview Logistics Park",
+    "post": {
+      "uid": "post-sg-01",
+      "name": "South Gatehouse",
+      "post_type_id": 3,
+      "post_type": "Gatehouse"
+    },
+    "scheduled_start_time": 1773550800000,
+    "scheduled_end_time": 1773579600000,
+    "variance": 2700000,
+    "actor": { "user": { "uid": "usr-5117" } }
+  },
+  {
+    "_comment": "3 of 6 — SYNTHETIC example — invented site, times, and identifiers; no operational data. The gatehouse officer finds two people inside the fence line near the north dock and files an incident report: incident_type_common 'trespass' from the published vocabulary, the organization's own label alongside in incident_type_internal, verified by an on-site check.",
+    "class_uid": 4230007,
+    "category_uid": 4230,
+    "activity_id": 1,
+    "activity_name": "Created",
+    "type_uid": 423000701,
+    "severity_id": 4,
+    "time": 1773555120000,
+    "derivation_id": 1,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "uid": "rpt-88490",
+      "correlation_uid": "evt-2026-0314-tr01"
+    },
+    "site_uid": "SITE-0042",
+    "site_name": "Harborview Logistics Park",
+    "incident_type_common": "trespass",
+    "incident_type_internal": "Trespass",
+    "disposition": {
+      "validation_level_id": 2,
+      "verification_method_id": 9,
+      "cause_id": 1
+    }
+  },
+  {
+    "_comment": "4 of 6 — SYNTHETIC example — invented site, times, and identifiers; no operational data. The mobile unit rolls: Response Activity is one event per phase, each with its own time, and every phase event carries the unit's full four-timestamp timeline on response_resource so no consumer has to reassemble the interval.",
+    "class_uid": 4230006,
+    "category_uid": 4230,
+    "activity_id": 3,
+    "activity_name": "En Route",
+    "type_uid": 423000603,
+    "severity_id": 4,
+    "time": 1773555480000,
+    "derivation_id": 1,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "uid": "resp-31207-p3",
+      "correlation_uid": "evt-2026-0314-tr01"
+    },
+    "site_uid": "SITE-0042",
+    "site_name": "Harborview Logistics Park",
+    "response_resource": [
+      {
+        "uid": "unit-7",
+        "name": "Mobile Patrol",
+        "resource_type_id": 2,
+        "user": { "uid": "usr-6003" },
+        "assigned_time": 1773555300000,
+        "enroute_time": 1773555480000,
+        "on_scene_time": 1773555960000,
+        "cleared_time": 1773557880000
+      }
+    ]
+  },
+  {
+    "_comment": "5 of 6 — SYNTHETIC example — invented site, times, and identifiers; no operational data. Eight minutes later the same unit is on scene — the next phase of the same response, same correlation_uid, dispatch-to-on-scene interval readable straight off the resource timeline.",
+    "class_uid": 4230006,
+    "category_uid": 4230,
+    "activity_id": 4,
+    "activity_name": "On Scene",
+    "type_uid": 423000604,
+    "severity_id": 4,
+    "time": 1773555960000,
+    "derivation_id": 1,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "uid": "resp-31207-p4",
+      "correlation_uid": "evt-2026-0314-tr01"
+    },
+    "site_uid": "SITE-0042",
+    "site_name": "Harborview Logistics Park",
+    "response_resource": [
+      {
+        "uid": "unit-7",
+        "name": "Mobile Patrol",
+        "resource_type_id": 2,
+        "user": { "uid": "usr-6003" },
+        "assigned_time": 1773555300000,
+        "enroute_time": 1773555480000,
+        "on_scene_time": 1773555960000,
+        "cleared_time": 1773557880000
+      }
+    ]
+  },
+  {
+    "_comment": "6 of 6 — SYNTHETIC example — invented site, times, and identifiers; no operational data. The label that makes the night's data worth keeping: a human triages the episode as genuine (cause Genuine, AVS Level 1, verified On Site Check, Responded Verified), fourteen minutes from report to triage. A signal with a disposition is a training example, an audit record, and a benchmark row.",
+    "class_uid": 4230003,
+    "category_uid": 4230,
+    "activity_id": 1,
+    "activity_name": "Triaged",
+    "type_uid": 423000301,
+    "severity_id": 4,
+    "time": 1773555960000,
+    "derivation_id": 6,
+    "metadata": {
+      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
+      "version": "0.1.0",
+      "profiles": ["physical_site"],
+      "uid": "disp-77031",
+      "correlation_uid": "evt-2026-0314-tr01"
+    },
+    "site_uid": "SITE-0042",
+    "site_name": "Harborview Logistics Park",
+    "disposition": {
+      "validation_level_id": 2,
+      "verification_method_id": 9,
+      "cause_id": 1,
+      "dispatch_outcome_id": 4,
+      "time_to_triage": 840000
+    }
+  }
+]

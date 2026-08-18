@@ -2,7 +2,9 @@
 
 **v0.1.0 · draft · not yet submitted to OCSF**
 
-`physec` is an open event schema for physical security operations: access control decisions, alarm signals and their disposition, guard patrols, post staffing, response dispatch, and incident reports.
+`physec` is an open event schema for physical security operations: access control decisions, alarm signals and their disposition, guard patrols, post staffing, response dispatch, and incident reports. As of v0.1 the required `incident_type_common` attribute is backed by a [published 24-value controlled vocabulary](vocabularies/incident_type_common.md) derived from a live production taxonomy.
+
+**physec is emitted in production.** An operational security firm (AGS Pro, Inc.) runs five live emitter views over its incident ontology — patrol, post staffing, alarm disposition, response, and incident report activity — producing events that validate against this schema; an instance-validation suite checks every emitted event's required attributes, enum ids, and type_uid arithmetic against these definitions.
 
 It is built as an extension to the [Open Cybersecurity Schema Framework](https://ocsf.io/) rather than as a new standard, so it inherits OCSF's governance, tooling, and validation — and so that physical events land in the same normalized event stream as logical ones.
 
@@ -93,8 +95,9 @@ Observable `type_id` values are **not** scoped by OCSF, so collisions are real. 
 
 **Committed for v0.1, before publication:**
 
-- `incident_type_common` ships with a published controlled vocabulary — a separate file with crosswalks to APCO 2.103.2, NIBRS, and the NFIRS 700-series. It is not a free string.
+- ✅ `incident_type_common` ships with a published controlled vocabulary — [`vocabularies/incident_type_common.md`](vocabularies/incident_type_common.md) (24 values, machine-readable [JSON](vocabularies/incident_type_common.json), derived from a live production taxonomy). Crosswalk columns to APCO 2.103.2, NIBRS, and the NFIRS 700-series are structurally present and marked unverified. It is not a free string.
 - The SIA DC-03 and APCO 2.103.2 normative texts are paywalled. The crosswalks in this draft were assembled from vendor implementations and will be verified against the purchased standards before any crosswalk is published as authoritative.
+- ✅ Continuous validation: every push runs the OCSF validator against the current upstream ocsf-schema (see .github/workflows/validate.yml); 12/12 checks green as of 2026-08-18.
 
 **Committed direction for v0.2:**
 

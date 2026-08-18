@@ -1,0 +1,128 @@
+{
+  "name": "incident_type_common",
+  "caption": "Common Incident Type",
+  "version": "0.1.0",
+  "description": "The controlled vocabulary for the incident_type_common attribute of Incident Report Activity (4230007). Values are append-only; renaming or removing a value is a breaking change. Crosswalk fields (apco_code, nibrs_code, nfirs_code) are structurally present but null in v0.1: they will be populated from licensed copies of APCO/NENA ANS 2.103.2, NIBRS, and NFIRS 700-series and marked verified per value in a minor release. Derived from a live 44-flag operational taxonomy running in production; see incident_type_common.md for guidance on borderline cases.",
+  "values": {
+    "suspicious_activity": {
+      "caption": "Suspicious Activity",
+      "description": "A person, vehicle, or circumstance observed that warrants attention but involves no confirmed offense and no confirmed unauthorized presence. Once unauthorized presence on the property is confirmed, use trespass.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "trespass": {
+      "caption": "Trespass",
+      "description": "Confirmed unauthorized presence of a person on the protected property, including refusal to leave and encampment. Distinct from suspicious_activity (presence not confirmed unauthorized) and access_violation (a control was defeated).",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "access_violation": {
+      "caption": "Access Violation",
+      "description": "An access control was circumvented or misused: tailgating, piggybacking, unauthorized credential use, or entry through a controlled portal without authorization. The defeat of the control is the defining feature, not mere presence.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "insecure_opening": {
+      "caption": "Insecure Opening",
+      "description": "A door, gate, window, or other opening found unsecured (open, unlocked, or propped) with no evidence of force. Where forced entry is evident, use burglary_attempt; where the opening was damaged, consider vandalism.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "theft": {
+      "caption": "Theft",
+      "description": "Confirmed taking of property, including cargo, materials, equipment, fuel, wire, or items from vehicles. An unsuccessful attempt to enter in order to steal belongs in burglary_attempt.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "burglary_attempt": {
+      "caption": "Burglary / Forced Entry Attempt",
+      "description": "Attempted or completed forced entry into a structure, enclosure, or vehicle, whether or not property was taken. Evidence of force distinguishes this from insecure_opening.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "vandalism": {
+      "caption": "Vandalism",
+      "description": "Deliberate damage or defacement of property, including graffiti and sabotage, where taking property was not the apparent object.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "disturbance": {
+      "caption": "Disturbance",
+      "description": "Verbal altercation, threatening or nuisance conduct, or disorderly activity without physical violence. Escalates to assault once physical contact occurs; use weapon when one is observed or mentioned.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "weapon": {
+      "caption": "Weapon Observed",
+      "description": "A weapon was observed, mentioned, or brandished. Takes precedence over disturbance or trespass classifications when present, regardless of whether another offense was completed.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "assault": {
+      "caption": "Assault",
+      "description": "Physical violence against a person, from a mutual fight to a battery on staff or the public. Supersedes disturbance once contact occurs.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "fire": {
+      "caption": "Fire / Smoke",
+      "description": "A fire, smoke, or combustion event of any size, confirmed or reasonably suspected.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "evacuation": {
+      "caption": "Evacuation",
+      "description": "An evacuation or shelter-in-place of any scope, whatever the trigger.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "medical": {
+      "caption": "Medical Emergency",
+      "description": "A medical emergency or injury requiring aid, from first aid rendered on site to EMS transport.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "safety_hazard": {
+      "caption": "Safety Hazard",
+      "description": "An immediate hazard to persons - spill, exposed wiring, structural compromise, blocked egress - requiring prompt mitigation. Non-immediate deficiencies belong in property_maintenance.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "utility_failure": {
+      "caption": "Utility Failure",
+      "description": "Loss or failure of a utility (power, water, gas, communications) creating an unsafe or materially degraded condition.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "property_maintenance": {
+      "caption": "Property / Maintenance Issue",
+      "description": "A non-immediate facility deficiency observed and reported: lighting out, leaks, broken fixtures or locks, sanitation, elevator faults. Immediate dangers are safety_hazard; damage done deliberately is vandalism.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "security_device_fault": {
+      "caption": "Security Device Fault",
+      "description": "A security device (camera, intercom, access controller, sensor, barrier arm) found faulty, offline, or damaged. A frequent false-alarm cause; the device fault itself is the event.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "parking_violation": {
+      "caption": "Parking Violation",
+      "description": "A vehicle parked or stored in violation of site rules - unauthorized space, abandoned vehicle, tow-eligible condition - without damage or injury.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "vehicle_incident": {
+      "caption": "Vehicle Incident",
+      "description": "A vehicle event involving damage, injury risk, or a traffic hazard: collision, struck fixture or barrier, dangerous operation on the property. Rule violations without damage are parking_violation.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "service_assist": {
+      "caption": "Service / Assist",
+      "description": "Routine assistance rendered to a customer, tenant, or visitor: escorts, lockouts, directions, deliveries, tenant requests. No adverse security condition is asserted.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "welfare_check": {
+      "caption": "Welfare Check",
+      "description": "A check on a person's wellbeing, requested or self-initiated, including unresponsive-person checks that do not become medical events.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "false_alarm": {
+      "caption": "False Alarm / Unfounded",
+      "description": "A signal or report investigated and determined to reflect no actual condition, where no other category applies. This classifies the unfounded outcome itself; paperwork artifacts (duplicates, tests) are administrative.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "administrative": {
+      "caption": "Administrative",
+      "description": "Documentation-only records: duplicate reports, tests, training entries, information-only notes. No field condition is asserted.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    },
+    "unexpected_occupancy": {
+      "caption": "Unexpected Occupancy",
+      "description": "A person or activity present in a space at a time or in a manner not expected by schedule or authorization, without confirmed trespass intent - an after-hours worker, an unbadged contractor in a controlled area. Confirmed unauthorized presence is trespass.",
+      "apco_code": null, "nibrs_code": null, "nfirs_code": null
+    }
+  }
+}

@@ -9,8 +9,13 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 for d in ["events", "objects", "profiles"]:
     p = os.path.join(ROOT, d)
     if os.path.exists(p):
-        shutil.rmtree(p)
-    os.makedirs(p)
+        # Clear CONTENTS, keep the directory: cloud-sync clients (OneDrive)
+        # hold a handle on the directory itself and deny the rmdir half of
+        # rmtree, while the files inside delete fine.
+        for entry in os.scandir(p):
+            (shutil.rmtree if entry.is_dir() else os.unlink)(entry.path)
+    else:
+        os.makedirs(p)
 
 
 def w(path, obj):
@@ -271,7 +276,7 @@ w("dictionary.json", {
         "dispatch_outcome": {"caption": "Dispatch Outcome", "description": "The dispatch outcome, normalized to the caption of the <code>dispatch_outcome_id</code> value.", "type": "string_t"},
 
         # --- incident ---------------------------------------------------
-        "incident_type_common": {"caption": "Common Incident Type", "description": "The incident type drawn from the controlled vocabulary published by this extension. Required so that locally defined types remain comparable across organizations.", "type": "string_t"},
+        "incident_type_common": {"caption": "Common Incident Type", "description": "The incident type drawn from the controlled vocabulary published by this extension (<code>vocabularies/incident_type_common.json</code>, 24 values, v0.1.0). Required so that locally defined types remain comparable across organizations.", "type": "string_t"},
         "incident_type_internal": {"caption": "Internal Incident Type", "description": "The incident type as classified by the reporting organization, retained verbatim.", "type": "string_t"},
         "nibrs_offense_code": {"caption": "NIBRS Offense Code", "description": "The offense code from the National Incident-Based Reporting System, where the incident describes a criminal act.", "type": "string_t"},
         "apco_incident_type": {"caption": "APCO Incident Type", "description": "The common incident type code used for public safety data exchange, where the incident was referred for dispatch.", "type": "string_t"},
