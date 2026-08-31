@@ -1,7 +1,10 @@
 {
   "caption": "Geo Location",
-  "description": "Adds physical site context to the core Geo Location object.",
+  "description": "Adds physical site context to the core Geo Location object when the Physical Site profile is applied.",
   "extends": "location",
+  "profiles": [
+    "physical_site"
+  ],
   "attributes": {
     "site_uid": {
       "requirement": "optional"

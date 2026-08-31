@@ -241,15 +241,15 @@
       "description": "The door, gate, turnstile, or other controlled opening.",
       "type": "portal"
     },
-    "credential": {
-      "caption": "Credential",
+    "physical_credential": {
+      "caption": "Physical Credential",
       "description": "The credential presented.",
-      "type": "credential"
+      "type": "physical_credential"
     },
-    "zone": {
-      "caption": "Zone",
+    "security_zone": {
+      "caption": "Security Zone",
       "description": "The security zone or area.",
-      "type": "zone"
+      "type": "security_zone"
     },
     "alarm_point": {
       "caption": "Alarm Point",
@@ -277,10 +277,10 @@
       "type": "response_resource",
       "is_array": true
     },
-    "disposition": {
-      "caption": "Disposition",
+    "disposition_details": {
+      "caption": "Disposition Details",
       "description": "The validated outcome of the signal.",
-      "type": "disposition"
+      "type": "disposition_details"
     },
     "portal_type_id": {
       "caption": "Portal Type ID",
@@ -780,7 +780,7 @@
     },
     "incident_type_common": {
       "caption": "Common Incident Type",
-      "description": "The incident type drawn from the controlled vocabulary published by this extension (<code>vocabularies/incident_type_common.json</code>, 24 values, v0.1.0). Required so that locally defined types remain comparable across organizations.",
+      "description": "The incident type drawn from the controlled vocabulary published by this extension (<code>vocabularies/incident_type_common.json</code>, 25 values, v0.1.1). Required so that locally defined types remain comparable across organizations.",
       "type": "string_t"
     },
     "incident_type_internal": {

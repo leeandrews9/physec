@@ -11,7 +11,7 @@
     "is_armed": {
       "requirement": "recommended"
     },
-    "zone": {
+    "security_zone": {
       "requirement": "recommended"
     },
     "device": {

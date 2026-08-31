@@ -1,8 +1,8 @@
 # physec — an OCSF extension for physical security operations
 
-**v0.1.0 · draft · proposed to the OCSF community** (uid reservation: [ocsf/ocsf-schema#1723](https://github.com/ocsf/ocsf-schema/pull/1723); core-category vs public-extension placement under community discussion)
+**v0.1.1 · draft · proposed to the OCSF community** (uid reservation: [ocsf/ocsf-schema#1723](https://github.com/ocsf/ocsf-schema/pull/1723); core-category vs public-extension placement under community discussion; v0.1.1 renames two objects and gates the core-object patch behind the profile in response to OCSF mappings-call feedback of 2026-08-20 — see [CHANGELOG](CHANGELOG.md))
 
-`physec` is an open event schema for physical security operations: access control decisions, alarm signals and their disposition, guard patrols, post staffing, response dispatch, and incident reports. As of v0.1 the required `incident_type_common` attribute is backed by a [published 24-value controlled vocabulary](vocabularies/incident_type_common.md) derived from a live production taxonomy.
+`physec` is an open event schema for physical security operations: access control decisions, alarm signals and their disposition, guard patrols, post staffing, response dispatch, and incident reports. As of v0.1 the required `incident_type_common` attribute is backed by a [published 25-value controlled vocabulary](vocabularies/incident_type_common.md) derived from a live production taxonomy.
 
 **physec is emitted in production.** An operational security firm (AGS Pro, Inc.) runs five live emitter views over its incident ontology — patrol, post staffing, alarm disposition, response, and incident report activity — producing events that validate against this schema; an instance-validation suite checks every emitted event's required attributes, enum ids, and type_uid arithmetic against these definitions.
 
@@ -62,7 +62,7 @@ So the layer where a security operation actually runs — *what was reported, wh
 | 4230006 | **Response Activity** | **No standard exists at all** |
 | 4230007 | Incident Report Activity | Partial — EIDD pattern adopted |
 
-**Nine objects:** `portal`, `credential`, `zone`, `alarm_point`, `post`, `checkpoint`, `patrol_tour`, `response_resource`, `disposition`, `signal_code`. Core OCSF `location`, `device`, `user`, `ldap_person`, `organization`, and `actor` are reused rather than duplicated; `location` is patched with site/building/floor.
+**Ten objects:** `portal`, `physical_credential`, `security_zone`, `alarm_point`, `post`, `checkpoint`, `patrol_tour`, `response_resource`, `disposition_details`, `signal_code`. Core OCSF `location`, `device`, `user`, `ldap_person`, `organization`, and `actor` are reused rather than duplicated; `location` gains site/building/floor context only when the `physical_site` profile is applied — no unconditional core patch.
 
 **One profile:** `physical_site`. Being a profile rather than a class attribute means it can be applied to core IAM and Authentication classes, so a badge-in and a network logon at the same site correlate. That is the physical/logical convergence case, and it's the reason to build on OCSF rather than standalone.
 
@@ -89,12 +89,29 @@ Alarm Disposition, Patrol, Post Staffing, and Response Activity have no
 machine-readable standard anywhere — they are the proposal. The two interop
 classes (Physical Access, Alarm Signal) cover ground ONVIF and SIA already
 own and could just as well land as core additions if the community prefers
-a leaner category. Where physec's `disposition` object overlaps core
+a leaner category. Where physec's `disposition_details` object overlaps core
 security-control disposition semantics, it maps onto them — and extends
 them with the alarm-industry vocabularies core lacks (AVS-01 validation
 levels, CS-V-01 verification methods, false-alarm causes, dispatch
 outcomes). Whether this ships as a core category or a public extension is
 the community's call; the schema content is the proposal either way.
+
+**Core names are never shadowed.** Guidance from the OCSF mappings call of
+2026-08-20 (thanks to Zach and Hunter): physical flavors of core concepts
+should ride core classes with a profile, and an extension should never
+redefine a core dictionary name. v0.1.1 applies both. `zone` became
+`security_zone` (core `zone` means a network zone) and `disposition` became
+`disposition_details` (core `disposition`/`disposition_id` are the findings
+verdict pair — an event can now carry both). `credential` became
+`physical_credential`, and is intended to shrink further: access grant/deny
+decisions should ride the core **Authentication** class with the
+`physical_site` profile, with badge, prox, and smart-card values proposed
+for the core `auth_factor` enum, leaving the object to door-state events
+(tailgate, antipassback) that are not authentication attempts. The
+site/building/floor additions to core `location` are now gated behind the
+profile rather than patched unconditionally — which also means every core
+`device` inherits physical site context through `device.location` wherever
+the profile is applied.
 
 ## Validate
 
@@ -125,7 +142,7 @@ Observable `type_id` values are **not** scoped by OCSF, so collisions are real. 
 
 **Committed for v0.1, before publication:**
 
-- ✅ `incident_type_common` ships with a published controlled vocabulary — [`vocabularies/incident_type_common.md`](vocabularies/incident_type_common.md) (24 values, machine-readable [JSON](vocabularies/incident_type_common.json), derived from a live production taxonomy). Crosswalk columns to APCO 2.103.2, NIBRS, and the NFIRS 700-series are structurally present and marked unverified. It is not a free string.
+- ✅ `incident_type_common` ships with a published controlled vocabulary — [`vocabularies/incident_type_common.md`](vocabularies/incident_type_common.md) (25 values, machine-readable [JSON](vocabularies/incident_type_common.json), derived from a live production taxonomy). Crosswalk columns to APCO 2.103.2, NIBRS, and the NFIRS 700-series are structurally present and marked unverified. It is not a free string.
 - The SIA DC-03 and APCO 2.103.2 normative texts are paywalled. The crosswalks in this draft were assembled from vendor implementations and will be verified against the purchased standards before any crosswalk is published as authoritative.
 - ✅ Continuous validation: every push runs the OCSF validator against the current upstream ocsf-schema (see .github/workflows/validate.yml); 12/12 checks green as of 2026-08-18.
 

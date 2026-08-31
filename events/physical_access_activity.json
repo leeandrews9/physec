@@ -62,7 +62,7 @@
       "group": "primary",
       "requirement": "required"
     },
-    "credential": {
+    "physical_credential": {
       "group": "primary",
       "requirement": "recommended"
     },
@@ -73,7 +73,7 @@
   "constraints": {
     "at_least_one": [
       "portal",
-      "credential"
+      "physical_credential"
     ]
   }
 }

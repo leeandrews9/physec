@@ -1,8 +1,8 @@
 {
-  "caption": "Zone",
-  "description": "The Zone object describes a security zone or area within a site.",
+  "caption": "Security Zone",
+  "description": "The Security Zone object describes a security zone or area within a site. Named to stay clear of the core zone dictionary attribute, which means a network zone.",
   "extends": "_entity",
-  "name": "zone",
+  "name": "security_zone",
   "observable": 42003,
   "attributes": {
     "zone_type_id": {

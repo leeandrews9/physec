@@ -10,20 +10,35 @@
     "time": 1773550020000,
     "derivation_id": 5,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "uid": "sessmiss-88121-cp-ny-04"
     },
     "site_uid": "SITE-0042",
     "site_name": "Harborview Logistics Park",
-    "patrol_tour": { "uid": "tour-nyp", "name": "North Yard Perimeter" },
+    "patrol_tour": {
+      "uid": "tour-nyp",
+      "name": "North Yard Perimeter"
+    },
     "checkpoint": {
       "uid": "cp-ny-04",
       "name": "North Yard Dock 4",
-      "location": { "site_uid": "SITE-0042", "site_name": "Harborview Logistics Park" }
+      "location": {
+        "site_uid": "SITE-0042",
+        "site_name": "Harborview Logistics Park"
+      }
     },
-    "actor": { "user": { "uid": "usr-3241" } }
+    "actor": {
+      "user": {
+        "uid": "usr-3241"
+      }
+    }
   },
   {
     "_comment": "2 of 6 — SYNTHETIC example — invented site, times, and identifiers; no operational data. The relieving officer reaches the South Gatehouse 45 minutes after the scheduled 22:00 start: a Late Arrival with the signed variance in milliseconds, backed by a clock punch (derivation Direct). The post object carries its required post_type_id.",
@@ -36,9 +51,14 @@
     "time": 1773553500000,
     "derivation_id": 1,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "uid": "shift-204418"
     },
     "site_uid": "SITE-0042",
@@ -52,7 +72,11 @@
     "scheduled_start_time": 1773550800000,
     "scheduled_end_time": 1773579600000,
     "variance": 2700000,
-    "actor": { "user": { "uid": "usr-5117" } }
+    "actor": {
+      "user": {
+        "uid": "usr-5117"
+      }
+    }
   },
   {
     "_comment": "3 of 6 — SYNTHETIC example — invented site, times, and identifiers; no operational data. The gatehouse officer finds two people inside the fence line near the north dock and files an incident report: incident_type_common 'trespass' from the published vocabulary, the organization's own label alongside in incident_type_internal, verified by an on-site check.",
@@ -65,9 +89,14 @@
     "time": 1773555120000,
     "derivation_id": 1,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "uid": "rpt-88490",
       "correlation_uid": "evt-2026-0314-tr01"
     },
@@ -75,7 +104,7 @@
     "site_name": "Harborview Logistics Park",
     "incident_type_common": "trespass",
     "incident_type_internal": "Trespass",
-    "disposition": {
+    "disposition_details": {
       "validation_level_id": 2,
       "verification_method_id": 9,
       "cause_id": 1
@@ -92,9 +121,14 @@
     "time": 1773555480000,
     "derivation_id": 1,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "uid": "resp-31207-p3",
       "correlation_uid": "evt-2026-0314-tr01"
     },
@@ -105,7 +139,9 @@
         "uid": "unit-7",
         "name": "Mobile Patrol",
         "resource_type_id": 2,
-        "user": { "uid": "usr-6003" },
+        "user": {
+          "uid": "usr-6003"
+        },
         "assigned_time": 1773555300000,
         "enroute_time": 1773555480000,
         "on_scene_time": 1773555960000,
@@ -124,9 +160,14 @@
     "time": 1773555960000,
     "derivation_id": 1,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "uid": "resp-31207-p4",
       "correlation_uid": "evt-2026-0314-tr01"
     },
@@ -137,7 +178,9 @@
         "uid": "unit-7",
         "name": "Mobile Patrol",
         "resource_type_id": 2,
-        "user": { "uid": "usr-6003" },
+        "user": {
+          "uid": "usr-6003"
+        },
         "assigned_time": 1773555300000,
         "enroute_time": 1773555480000,
         "on_scene_time": 1773555960000,
@@ -156,15 +199,20 @@
     "time": 1773555960000,
     "derivation_id": 6,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "uid": "disp-77031",
       "correlation_uid": "evt-2026-0314-tr01"
     },
     "site_uid": "SITE-0042",
     "site_name": "Harborview Logistics Park",
-    "disposition": {
+    "disposition_details": {
       "validation_level_id": 2,
       "verification_method_id": 9,
       "cause_id": 1,

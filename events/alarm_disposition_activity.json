@@ -26,7 +26,7 @@
         }
       }
     },
-    "disposition": {
+    "disposition_details": {
       "group": "primary",
       "requirement": "required"
     },

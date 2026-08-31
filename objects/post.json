@@ -12,7 +12,7 @@
     "post_type": {
       "requirement": "optional"
     },
-    "zone": {
+    "security_zone": {
       "requirement": "optional"
     },
     "location": {

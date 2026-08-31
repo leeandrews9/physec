@@ -1,8 +1,8 @@
 {
-  "caption": "Disposition",
-  "description": "The Disposition object records what an event turned out to be and what was done about it. It is the link between a reported signal and its verified outcome, and is what allows false alarm rates, verification effectiveness, and response performance to be measured across sites and systems.",
+  "caption": "Disposition Details",
+  "description": "The Disposition Details object records what an event turned out to be and what was done about it. It is the link between a reported signal and its verified outcome, and is what allows false alarm rates, verification effectiveness, and response performance to be measured across sites and systems. Named to stay clear of the core disposition and disposition_id attributes, the findings verdict pair; an event may carry both.",
   "extends": "object",
-  "name": "disposition",
+  "name": "disposition_details",
   "attributes": {
     "validation_level_id": {
       "group": "classification",

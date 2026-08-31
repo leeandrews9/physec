@@ -9,9 +9,14 @@
     "lifecycle_id": 1,
     "time": 1786622040000,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "correlation_uid": "evt-2026-0214-a91f"
     },
     "signal_code": {
@@ -28,7 +33,11 @@
       "name": "West fence beam 3",
       "sensor_type": "beam",
       "is_armed": true,
-      "zone": { "uid": "Z-PERIM-W", "name": "West perimeter", "zone_type_id": 1 }
+      "security_zone": {
+        "uid": "Z-PERIM-W",
+        "name": "West perimeter",
+        "zone_type_id": 1
+      }
     },
     "message": "Perimeter beam activation, west fence segment 3."
   },
@@ -41,14 +50,22 @@
     "severity_id": 1,
     "time": 1786622094000,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "correlation_uid": "evt-2026-0214-a91f"
     },
     "site_uid": "SITE-0417",
-    "alarm_point": { "uid": "AP-W-FENCE-03", "name": "West fence beam 3" },
-    "disposition": {
+    "alarm_point": {
+      "uid": "AP-W-FENCE-03",
+      "name": "West fence beam 3"
+    },
+    "disposition_details": {
       "validation_level_id": 1,
       "verification_method_id": 6,
       "cause_id": 7,
@@ -68,14 +85,22 @@
     "severity_id": 4,
     "time": 1786636331000,
     "metadata": {
-      "product": { "name": "Reference Emitter", "vendor_name": "physec" },
-      "version": "0.1.0",
-      "profiles": ["physical_site"],
+      "product": {
+        "name": "Reference Emitter",
+        "vendor_name": "physec"
+      },
+      "version": "0.1.1",
+      "profiles": [
+        "physical_site"
+      ],
       "correlation_uid": "evt-2026-0214-c02d"
     },
     "site_uid": "SITE-0417",
-    "alarm_point": { "uid": "AP-W-FENCE-03", "name": "West fence beam 3" },
-    "disposition": {
+    "alarm_point": {
+      "uid": "AP-W-FENCE-03",
+      "name": "West fence beam 3"
+    },
+    "disposition_details": {
       "validation_level_id": 4,
       "verification_method_id": 6,
       "cause_id": 1,

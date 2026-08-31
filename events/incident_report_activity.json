@@ -67,7 +67,7 @@
     "response_resource": {
       "requirement": "optional"
     },
-    "disposition": {
+    "disposition_details": {
       "requirement": "optional"
     }
   }

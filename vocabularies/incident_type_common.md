@@ -1,6 +1,6 @@
 # incident_type_common — controlled vocabulary
 
-**Version 0.1.0 · Published** · the vocabulary behind the required
+**Version 0.1.1 · Published** · the vocabulary behind the required
 `incident_type_common` attribute of Incident Report Activity (4230007).
 Machine-readable form: [`incident_type_common.json`](incident_type_common.json).
 
@@ -43,15 +43,21 @@ to do.
 | `false_alarm` | False Alarm / Unfounded | Investigated and determined to reflect no actual condition, where no other category applies. Paperwork artifacts → `administrative`. | unverified | unverified | unverified |
 | `administrative` | Administrative | Documentation-only records: duplicates, tests, training, information-only. | unverified | unverified | unverified |
 | `unexpected_occupancy` | Unexpected Occupancy | Person or activity present outside schedule or authorization without confirmed trespass intent. Confirmed unauthorized → `trespass`. | unverified | unverified | unverified |
+| `unclassified` | Unclassified | A report filed without a classifying flag; the incident type could not be determined at the source system. Producers should emit this value rather than dropping the event. | unverified | unverified | unverified |
 
 ## Provenance
 
 This vocabulary was not designed at a whiteboard. It is the distillation of a
 live 44-flag operational taxonomy running in production at a US physical
-security firm, where every flag has been crosswalked to one of these 24
+security firm, where every flag has been crosswalked to one of these
 values and exercised by real incident and dispatch reports since 2026-08 —
 first through an interim disposition crosswalk, then through a structured
 verification labeling layer feeding a live physec emitter. Flags too
 granular for cross-organization comparability (catalytic converter theft,
 copper theft, gate tailgating) map into these values and carry their detail
 in `incident_type_internal` and the method-of-entry tagging instead.
+
+v0.1.1 adds `unclassified`, added after production measurement showed 15% of
+reports reach the emitter with no flag at all: without the value they were
+silently dropped from the event stream, which is worse than an honest
+unknown.

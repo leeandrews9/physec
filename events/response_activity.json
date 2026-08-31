@@ -50,7 +50,7 @@
       "group": "primary",
       "requirement": "required"
     },
-    "disposition": {
+    "disposition_details": {
       "requirement": "optional"
     },
     "post": {

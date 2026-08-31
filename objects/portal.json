@@ -18,7 +18,7 @@
     "portal_physical_state": {
       "requirement": "recommended"
     },
-    "zone": {
+    "security_zone": {
       "requirement": "recommended"
     },
     "location": {

@@ -37,7 +37,7 @@ w("extension.json", {
     "caption": "Physical Security",
     "description": "The Physical Security extension defines event classes and objects for physical security operations, covering access control, alarm signalling and disposition, guard patrols, post staffing, response dispatch, and incident reporting. Event identifiers are crosswalked to established vocabularies including the SIA DC-03 format, the Ademco Contact ID protocol, ONVIF topic namespaces, and the ANSI/TMA AVS-01 alarm validation score.",
     "name": "physec",
-    "version": "0.1.0",
+    "version": "0.1.1",
 })
 
 w("categories.json", {
@@ -173,14 +173,14 @@ w("dictionary.json", {
 
         # --- objects --------------------------------------------------
         "portal": {"caption": "Portal", "description": "The door, gate, turnstile, or other controlled opening.", "type": "portal"},
-        "credential": {"caption": "Credential", "description": "The credential presented.", "type": "credential"},
-        "zone": {"caption": "Zone", "description": "The security zone or area.", "type": "zone"},
+        "physical_credential": {"caption": "Physical Credential", "description": "The credential presented.", "type": "physical_credential"},
+        "security_zone": {"caption": "Security Zone", "description": "The security zone or area.", "type": "security_zone"},
         "alarm_point": {"caption": "Alarm Point", "description": "The monitored point that generated the signal.", "type": "alarm_point"},
         "post": {"caption": "Post", "description": "The guard post.", "type": "post"},
         "checkpoint": {"caption": "Checkpoint", "description": "The patrol checkpoint.", "type": "checkpoint"},
         "patrol_tour": {"caption": "Patrol Tour", "description": "The patrol tour session.", "type": "patrol_tour"},
         "response_resource": {"caption": "Response Resource", "description": "The resource assigned to respond.", "type": "response_resource", "is_array": True},
-        "disposition": {"caption": "Disposition", "description": "The validated outcome of the signal.", "type": "disposition"},
+        "disposition_details": {"caption": "Disposition Details", "description": "The validated outcome of the signal.", "type": "disposition_details"},
 
         # --- portal ---------------------------------------------------
         "portal_type_id": {"caption": "Portal Type ID", "description": "The normalized type of the controlled opening.", "type": "integer_t", "sibling": "portal_type", "enum": enum([
@@ -276,7 +276,7 @@ w("dictionary.json", {
         "dispatch_outcome": {"caption": "Dispatch Outcome", "description": "The dispatch outcome, normalized to the caption of the <code>dispatch_outcome_id</code> value.", "type": "string_t"},
 
         # --- incident ---------------------------------------------------
-        "incident_type_common": {"caption": "Common Incident Type", "description": "The incident type drawn from the controlled vocabulary published by this extension (<code>vocabularies/incident_type_common.json</code>, 24 values, v0.1.0). Required so that locally defined types remain comparable across organizations.", "type": "string_t"},
+        "incident_type_common": {"caption": "Common Incident Type", "description": "The incident type drawn from the controlled vocabulary published by this extension (<code>vocabularies/incident_type_common.json</code>, 25 values, v0.1.1). Required so that locally defined types remain comparable across organizations.", "type": "string_t"},
         "incident_type_internal": {"caption": "Internal Incident Type", "description": "The incident type as classified by the reporting organization, retained verbatim.", "type": "string_t"},
         "nibrs_offense_code": {"caption": "NIBRS Offense Code", "description": "The offense code from the National Incident-Based Reporting System, where the incident describes a criminal act.", "type": "string_t"},
         "apco_incident_type": {"caption": "APCO Incident Type", "description": "The common incident type code used for public safety data exchange, where the incident was referred for dispatch.", "type": "string_t"},
@@ -303,7 +303,7 @@ w("profiles/physical_site.json", {
         "site_name": {"requirement": "optional"},
         "building": {"requirement": "optional"},
         "floor": {"requirement": "optional"},
-        "zone": {"requirement": "optional"},
+        "security_zone": {"requirement": "optional"},
     },
 })
 
@@ -335,16 +335,16 @@ w("objects/portal.json", {
         "portal_type": {"requirement": "optional"},
         "portal_mode": {"requirement": "recommended"},
         "portal_physical_state": {"requirement": "recommended"},
-        "zone": {"requirement": "recommended"},
+        "security_zone": {"requirement": "recommended"},
         "location": {"requirement": "optional"},
     },
 })
 
-w("objects/credential.json", {
-    "caption": "Credential",
-    "description": "The Credential object describes a token presented to obtain access. Identifying values are expected to be tokenized or hashed by the producer; raw biometric samples are out of scope for this schema and must not be carried.",
+w("objects/physical_credential.json", {
+    "caption": "Physical Credential",
+    "description": "The Physical Credential object describes a token presented to obtain access. Identifying values are expected to be tokenized or hashed by the producer; raw biometric samples are out of scope for this schema and must not be carried. Access grant and deny decisions are intended to ride the core Authentication class with the Physical Site profile, with badge, prox, and smart-card values proposed for the core auth_factor enum; this object carries credential context for door-state events, such as tailgate and antipassback conditions, that are not authentication attempts.",
     "extends": "_entity",
-    "name": "credential",
+    "name": "physical_credential",
     "observable": 42002,
     "attributes": {
         "credential_type_id": {"group": "classification", "requirement": "required"},
@@ -355,11 +355,11 @@ w("objects/credential.json", {
     },
 })
 
-w("objects/zone.json", {
-    "caption": "Zone",
-    "description": "The Zone object describes a security zone or area within a site.",
+w("objects/security_zone.json", {
+    "caption": "Security Zone",
+    "description": "The Security Zone object describes a security zone or area within a site. Named to stay clear of the core zone dictionary attribute, which means a network zone.",
     "extends": "_entity",
-    "name": "zone",
+    "name": "security_zone",
     "observable": 42003,
     "attributes": {
         "zone_type_id": {"group": "classification", "requirement": "recommended"},
@@ -378,7 +378,7 @@ w("objects/alarm_point.json", {
     "attributes": {
         "sensor_type": {"requirement": "recommended"},
         "is_armed": {"requirement": "recommended"},
-        "zone": {"requirement": "recommended"},
+        "security_zone": {"requirement": "recommended"},
         "device": {"requirement": "optional"},
     },
 })
@@ -392,7 +392,7 @@ w("objects/post.json", {
     "attributes": {
         "post_type_id": {"group": "classification", "requirement": "required"},
         "post_type": {"requirement": "optional"},
-        "zone": {"requirement": "optional"},
+        "security_zone": {"requirement": "optional"},
         "location": {"requirement": "optional"},
     },
 })
@@ -405,7 +405,7 @@ w("objects/checkpoint.json", {
     "observable": 42006,
     "attributes": {
         "checkpoint_token_type": {"requirement": "recommended"},
-        "zone": {"requirement": "optional"},
+        "security_zone": {"requirement": "optional"},
         "location": {"requirement": "recommended"},
     },
 })
@@ -441,11 +441,11 @@ w("objects/response_resource.json", {
     },
 })
 
-w("objects/disposition.json", {
-    "caption": "Disposition",
-    "description": "The Disposition object records what an event turned out to be and what was done about it. It is the link between a reported signal and its verified outcome, and is what allows false alarm rates, verification effectiveness, and response performance to be measured across sites and systems.",
+w("objects/disposition_details.json", {
+    "caption": "Disposition Details",
+    "description": "The Disposition Details object records what an event turned out to be and what was done about it. It is the link between a reported signal and its verified outcome, and is what allows false alarm rates, verification effectiveness, and response performance to be measured across sites and systems. Named to stay clear of the core disposition and disposition_id attributes, the findings verdict pair; an event may carry both.",
     "extends": "object",
-    "name": "disposition",
+    "name": "disposition_details",
     "attributes": {
         "validation_level_id": {"group": "classification", "requirement": "required"},
         "validation_level": {"requirement": "optional"},
@@ -460,11 +460,14 @@ w("objects/disposition.json", {
     },
 })
 
-# patch core location
+# extend core location, gated behind the profile: the site attributes appear
+# only when the physical_site profile is applied, never as an unconditional
+# patch to a core object (OCSF mappings-call guidance, 2026-08-20).
 w("objects/location.json", {
     "caption": "Geo Location",
-    "description": "Adds physical site context to the core Geo Location object.",
+    "description": "Adds physical site context to the core Geo Location object when the Physical Site profile is applied.",
     "extends": "location",
+    "profiles": ["physical_site"],
     "attributes": {
         "site_uid": {"requirement": "optional"},
         "site_name": {"requirement": "optional"},
@@ -497,7 +500,7 @@ w("events/physical_security.json", {
         "certainty": {"requirement": "optional"},
         "response_type_id": {"requirement": "optional"},
         "response_type": {"requirement": "optional"},
-        "zone": {"group": "context", "requirement": "recommended"},
+        "security_zone": {"group": "context", "requirement": "recommended"},
         "location": {"group": "context", "requirement": "recommended"},
         "device": {"group": "context", "requirement": "optional"},
         "actor": {"group": "context", "requirement": "optional"},
@@ -527,10 +530,10 @@ w("events/physical_access_activity.json", {
             (12, "Tamper", "The portal, reader, or its enclosure was tampered with. Equivalent to SIA TA and Contact ID 137 or 144."),
         ])},
         "portal": {"group": "primary", "requirement": "required"},
-        "credential": {"group": "primary", "requirement": "recommended"},
+        "physical_credential": {"group": "primary", "requirement": "recommended"},
         "held_open_duration": {"requirement": "optional"},
     },
-    "constraints": {"at_least_one": ["portal", "credential"]},
+    "constraints": {"at_least_one": ["portal", "physical_credential"]},
 })
 
 w("events/alarm_signal_activity.json", {
@@ -572,7 +575,7 @@ w("events/alarm_disposition_activity.json", {
             (3, "Cleared", "The signal was closed without further action."),
             (4, "Reopened", "A previously closed signal was reopened."),
         ])},
-        "disposition": {"group": "primary", "requirement": "required"},
+        "disposition_details": {"group": "primary", "requirement": "required"},
         "alarm_point": {"group": "primary", "requirement": "recommended"},
         "response_resource": {"requirement": "optional"},
     },
@@ -656,7 +659,7 @@ w("events/response_activity.json", {
             (9, "Escalated To Agency", "The event was referred to a public safety agency."),
         ])},
         "response_resource": {"group": "primary", "requirement": "required"},
-        "disposition": {"requirement": "optional"},
+        "disposition_details": {"requirement": "optional"},
         "post": {"requirement": "optional"},
     },
 })
@@ -687,7 +690,7 @@ w("events/incident_report_activity.json", {
         "loss_amount": {"requirement": "optional"},
         "post": {"requirement": "optional"},
         "response_resource": {"requirement": "optional"},
-        "disposition": {"requirement": "optional"},
+        "disposition_details": {"requirement": "optional"},
     },
 })
 
