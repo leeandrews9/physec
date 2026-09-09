@@ -16,7 +16,7 @@
     "floor": {
       "requirement": "optional"
     },
-    "security_zone": {
+    "site_zone": {
       "requirement": "optional"
     }
   }

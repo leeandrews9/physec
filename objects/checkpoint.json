@@ -8,7 +8,7 @@
     "checkpoint_token_type": {
       "requirement": "recommended"
     },
-    "security_zone": {
+    "site_zone": {
       "requirement": "optional"
     },
     "location": {

@@ -37,7 +37,7 @@ w("extension.json", {
     "caption": "Physical Security",
     "description": "The Physical Security extension defines event classes and objects for physical security operations, covering access control, alarm signalling and disposition, guard patrols, post staffing, response dispatch, and incident reporting. Event identifiers are crosswalked to established vocabularies including the SIA DC-03 format, the Ademco Contact ID protocol, ONVIF topic namespaces, and the ANSI/TMA AVS-01 alarm validation score.",
     "name": "physec",
-    "version": "0.1.1",
+    "version": "0.1.2",
 })
 
 w("categories.json", {
@@ -174,7 +174,7 @@ w("dictionary.json", {
         # --- objects --------------------------------------------------
         "portal": {"caption": "Portal", "description": "The door, gate, turnstile, or other controlled opening.", "type": "portal"},
         "physical_credential": {"caption": "Physical Credential", "description": "The credential presented.", "type": "physical_credential"},
-        "security_zone": {"caption": "Security Zone", "description": "The security zone or area.", "type": "security_zone"},
+        "site_zone": {"caption": "Site Zone", "description": "The site zone where the activity occurred: a defined area within a physical site that shares a common security posture.", "type": "site_zone"},
         "alarm_point": {"caption": "Alarm Point", "description": "The monitored point that generated the signal.", "type": "alarm_point"},
         "post": {"caption": "Post", "description": "The guard post.", "type": "post"},
         "checkpoint": {"caption": "Checkpoint", "description": "The patrol checkpoint.", "type": "checkpoint"},
@@ -212,7 +212,7 @@ w("dictionary.json", {
         "is_antipassback_violated": {"caption": "Antipassback Violated", "description": "Indicates the presentation violated an antipassback rule.", "type": "boolean_t"},
 
         # --- zone / alarm point ---------------------------------------
-        "zone_type_id": {"caption": "Zone Type ID", "description": "The normalized classification of the zone.", "type": "integer_t", "sibling": "zone_type", "enum": enum([
+        "zone_type_id": {"caption": "Zone Type ID", "description": "The normalized classification of the zone. These are generic tiers by security posture. Regime-specific tiers map onto them rather than extending the list: for example, a DoD or DOE Controlled, Limited, or Protected Area maps to Restricted, and an Exclusion, Vital, or Material Access Area maps to Critical. Carry the native tier name in <code>zone_type</code>.", "type": "integer_t", "sibling": "zone_type", "enum": enum([
             (1, "Perimeter", "The outer boundary of the site."),
             (2, "Public", "An area open to the public."),
             (3, "Restricted", "An area restricted to authorized persons."),
@@ -303,7 +303,7 @@ w("profiles/physical_site.json", {
         "site_name": {"requirement": "optional"},
         "building": {"requirement": "optional"},
         "floor": {"requirement": "optional"},
-        "security_zone": {"requirement": "optional"},
+        "site_zone": {"requirement": "optional"},
     },
 })
 
@@ -335,7 +335,7 @@ w("objects/portal.json", {
         "portal_type": {"requirement": "optional"},
         "portal_mode": {"requirement": "recommended"},
         "portal_physical_state": {"requirement": "recommended"},
-        "security_zone": {"requirement": "recommended"},
+        "site_zone": {"requirement": "recommended"},
         "location": {"requirement": "optional"},
     },
 })
@@ -355,11 +355,11 @@ w("objects/physical_credential.json", {
     },
 })
 
-w("objects/security_zone.json", {
-    "caption": "Security Zone",
-    "description": "The Security Zone object describes a security zone or area within a site. Named to stay clear of the core zone dictionary attribute, which means a network zone.",
+w("objects/site_zone.json", {
+    "caption": "Site Zone",
+    "description": "The Site Zone object describes a site zone: a defined area within a physical site that shares a common security posture. Named to stay clear of the core zone dictionary attribute, which means a network zone.",
     "extends": "_entity",
-    "name": "security_zone",
+    "name": "site_zone",
     "observable": 42003,
     "attributes": {
         "zone_type_id": {"group": "classification", "requirement": "recommended"},
@@ -378,7 +378,7 @@ w("objects/alarm_point.json", {
     "attributes": {
         "sensor_type": {"requirement": "recommended"},
         "is_armed": {"requirement": "recommended"},
-        "security_zone": {"requirement": "recommended"},
+        "site_zone": {"requirement": "recommended"},
         "device": {"requirement": "optional"},
     },
 })
@@ -392,7 +392,7 @@ w("objects/post.json", {
     "attributes": {
         "post_type_id": {"group": "classification", "requirement": "required"},
         "post_type": {"requirement": "optional"},
-        "security_zone": {"requirement": "optional"},
+        "site_zone": {"requirement": "optional"},
         "location": {"requirement": "optional"},
     },
 })
@@ -405,7 +405,7 @@ w("objects/checkpoint.json", {
     "observable": 42006,
     "attributes": {
         "checkpoint_token_type": {"requirement": "recommended"},
-        "security_zone": {"requirement": "optional"},
+        "site_zone": {"requirement": "optional"},
         "location": {"requirement": "recommended"},
     },
 })
@@ -500,7 +500,7 @@ w("events/physical_security.json", {
         "certainty": {"requirement": "optional"},
         "response_type_id": {"requirement": "optional"},
         "response_type": {"requirement": "optional"},
-        "security_zone": {"group": "context", "requirement": "recommended"},
+        "site_zone": {"group": "context", "requirement": "recommended"},
         "location": {"group": "context", "requirement": "recommended"},
         "device": {"group": "context", "requirement": "optional"},
         "actor": {"group": "context", "requirement": "optional"},

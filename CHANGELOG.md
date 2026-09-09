@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.1.2 — 2026-09-09
+
+Rename `security_zone` → `site_zone`; tier crosswalk guidance; no uid or enum
+changes.
+
+- **`security_zone` → `site_zone`** (object + attribute). "Security zone" already
+  means a network zone in firewalls and DNS appliances (raised on the OCSF
+  community call of 2026-09-08); `site_zone` sits beside `site_uid` and
+  `site_name`. References updated on `alarm_point`, `checkpoint`, `portal`,
+  `post`, the base class, the `physical_site` profile, and the examples.
+  Observable type id 42003 is unchanged.
+- `zone_type_id` description now states that the six values are generic tiers
+  by security posture and that regime-specific tiers (DoD, DOE, NRC areas) map
+  onto them rather than extending the list, with the native tier name carried
+  in `zone_type`. Enum values unchanged.
+
 ## 0.1.1 — 2026-08-31
 
 Applies the guidance from the OCSF mappings call of 2026-08-20 (Zach, Hunter):

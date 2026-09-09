@@ -13,7 +13,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.1",
+      "version": "0.1.2",
       "profiles": [
         "physical_site"
       ],
@@ -33,7 +33,7 @@
       "portal_type_id": 1,
       "portal_mode": "Accessed",
       "portal_physical_state": "Open",
-      "security_zone": {
+      "site_zone": {
         "uid": "Z-DOCK-2",
         "name": "Dock 2",
         "zone_type_id": 3
@@ -62,7 +62,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.1",
+      "version": "0.1.2",
       "profiles": [
         "physical_site"
       ]
@@ -73,7 +73,7 @@
       "uid": "POST-0417-GH1",
       "name": "Main gatehouse",
       "post_type_id": 3,
-      "security_zone": {
+      "site_zone": {
         "uid": "Z-ENTRY",
         "name": "Main entry",
         "zone_type_id": 5
@@ -98,7 +98,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.1",
+      "version": "0.1.2",
       "profiles": [
         "physical_site"
       ]

@@ -13,7 +13,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.1",
+      "version": "0.1.2",
       "profiles": [
         "physical_site"
       ],
@@ -33,7 +33,7 @@
       "name": "West fence beam 3",
       "sensor_type": "beam",
       "is_armed": true,
-      "security_zone": {
+      "site_zone": {
         "uid": "Z-PERIM-W",
         "name": "West perimeter",
         "zone_type_id": 1
@@ -54,7 +54,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.1",
+      "version": "0.1.2",
       "profiles": [
         "physical_site"
       ],
@@ -89,7 +89,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.1",
+      "version": "0.1.2",
       "profiles": [
         "physical_site"
       ],

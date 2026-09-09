@@ -246,10 +246,10 @@
       "description": "The credential presented.",
       "type": "physical_credential"
     },
-    "security_zone": {
-      "caption": "Security Zone",
-      "description": "The security zone or area.",
-      "type": "security_zone"
+    "site_zone": {
+      "caption": "Site Zone",
+      "description": "The site zone where the activity occurred: a defined area within a physical site that shares a common security posture.",
+      "type": "site_zone"
     },
     "alarm_point": {
       "caption": "Alarm Point",
@@ -391,7 +391,7 @@
     },
     "zone_type_id": {
       "caption": "Zone Type ID",
-      "description": "The normalized classification of the zone.",
+      "description": "The normalized classification of the zone. These are generic tiers by security posture. Regime-specific tiers map onto them rather than extending the list: for example, a DoD or DOE Controlled, Limited, or Protected Area maps to Restricted, and an Exclusion, Vital, or Material Access Area maps to Critical. Carry the native tier name in <code>zone_type</code>.",
       "type": "integer_t",
       "sibling": "zone_type",
       "enum": {

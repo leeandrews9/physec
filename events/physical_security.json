@@ -47,7 +47,7 @@
     "response_type": {
       "requirement": "optional"
     },
-    "security_zone": {
+    "site_zone": {
       "group": "context",
       "requirement": "recommended"
     },
