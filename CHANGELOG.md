@@ -1,5 +1,33 @@
 # Changelog
 
+## 0.1.3 — 2026-09-22
+
+Applies the first maintainer review of the core enum PR
+([ocsf/ocsf-schema#1757](https://github.com/ocsf/ocsf-schema/pull/1757)) to the
+two extension enums that carried the same ambiguities. No class shapes or uids
+changed.
+
+- **`credential_type_id`: `Card` split into `Proximity Card` (1) and
+  `Smart Card` (2).** The old single value hid the distinction that core now
+  draws on `factor_type_id`: a proximity card presents a static identifier and
+  is not cryptographically authenticated; a smart card is authenticated through
+  a cryptographic exchange with the reader. The line is cryptographic
+  authentication, not operating frequency or form factor, so a 13.56 MHz card
+  read only by its serial number is a proximity card. `Mobile` is renamed
+  `Mobile Credential` to match core. **Values 2–7 are renumbered to 3–8**
+  (Mobile Credential 3, PIN 4, Biometric 5, License Plate 6, Key 7, Escort 8).
+  No known producer populates this attribute yet, so the renumber is taken now
+  rather than carrying a coarse value beside two precise ones.
+- **`dispatch_outcome_id`: `Responded Unfounded` (5) narrowed; `Responded
+  Unsubstantiated` (7) added.** Value 5 now means a resource arrived and
+  established that the condition was not genuine. A resource that arrived and
+  could neither confirm nor rule out the condition is the new value 7, so
+  consumers do not read an inconclusive visit as a confirmed false alarm. In a
+  production corpus from a US guarding and monitoring operation, all 66
+  "no event" dispatch outcomes carry no identified false-alarm cause; under
+  the old definition every one of them was emitted as unfounded. Values 1–6
+  are unchanged.
+
 ## 0.1.2 — 2026-09-09
 
 Rename `security_zone` → `site_zone`; tier crosswalk guidance; no uid or enum

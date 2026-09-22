@@ -37,7 +37,7 @@ w("extension.json", {
     "caption": "Physical Security",
     "description": "The Physical Security extension defines event classes and objects for physical security operations, covering access control, alarm signalling and disposition, guard patrols, post staffing, response dispatch, and incident reporting. Event identifiers are crosswalked to established vocabularies including the SIA DC-03 format, the Ademco Contact ID protocol, ONVIF topic namespaces, and the ANSI/TMA AVS-01 alarm validation score.",
     "name": "physec",
-    "version": "0.1.2",
+    "version": "0.1.3",
 })
 
 w("categories.json", {
@@ -131,8 +131,9 @@ DISPATCH_OUTCOME = enum([
     (2, "Dispatched", "A response resource was dispatched."),
     (3, "Cancelled En Route", "A dispatch was cancelled before arrival."),
     (4, "Responded Verified", "A resource arrived and confirmed the condition."),
-    (5, "Responded Unfounded", "A resource arrived and found no condition."),
+    (5, "Responded Unfounded", "A resource arrived and established that the condition was not genuine, for example a false or nuisance alarm with an identified cause. This is distinct from <code>7</code> 'Responded Unsubstantiated', where no determination could be reached."),
     (6, "Chargeable False Alarm", "The event was assessed as a chargeable false alarm under a local ordinance."),
+    (7, "Responded Unsubstantiated", "A resource arrived and could neither confirm nor rule out the condition, for example no evidence of a cause was found. This is distinct from <code>5</code> 'Responded Unfounded', which asserts that the condition was not genuine."),
 ])
 
 DERIVATION = enum([
@@ -199,13 +200,14 @@ w("dictionary.json", {
 
         # --- credential -----------------------------------------------
         "credential_type_id": {"caption": "Credential Type ID", "description": "The normalized form of the credential presented.", "type": "integer_t", "sibling": "credential_type", "enum": enum([
-            (1, "Card", "A physical proximity or smart card."),
-            (2, "Mobile", "A mobile device credential."),
-            (3, "PIN", "A keypad-entered personal identification number."),
-            (4, "Biometric", "A biometric sample."),
-            (5, "License Plate", "A vehicle registration plate read."),
-            (6, "Key", "A mechanical key."),
-            (7, "Escort", "Entry authorized by an escorting person rather than by a credential."),
+            (1, "Proximity Card", "A card, key fob, or tag that presents a static identifier to a reader and is not cryptographically authenticated, such as a 125 kHz proximity credential or a card read only by its serial number. The distinction from <code>2</code> 'Smart Card' is the absence of cryptographic authentication, not the operating frequency or form factor."),
+            (2, "Smart Card", "A contact or contactless credential that holds cryptographic keys and is authenticated through a cryptographic exchange with the reader, such as a PIV, CAC, or DESFire card. A smart card that is read only by its serial number, without cryptographic authentication, is a <code>1</code> 'Proximity Card'."),
+            (3, "Mobile Credential", "A credential held on a mobile device and presented over NFC or Bluetooth, such as a mobile access badge in a wallet application."),
+            (4, "PIN", "A keypad-entered personal identification number."),
+            (5, "Biometric", "A biometric sample."),
+            (6, "License Plate", "A vehicle registration plate read."),
+            (7, "Key", "A mechanical key."),
+            (8, "Escort", "Entry authorized by an escorting person rather than by a credential."),
         ])},
         "credential_type": {"caption": "Credential Type", "description": "The credential type, normalized to the caption of the <code>credential_type_id</code> value.", "type": "string_t"},
         "credential_status": {"caption": "Credential Status", "description": "The status of the credential, using the ONVIF credential reason vocabulary. Expected values are LockedOut, Blocked, Lost, Stolen, Damaged, Destroyed, Inactivity, Expired, and RenewalNeeded.", "type": "string_t"},

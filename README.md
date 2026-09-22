@@ -1,6 +1,6 @@
 # physec — an OCSF extension for physical security operations
 
-**v0.1.2 · draft · proposed to the OCSF community** (uid reservation: [ocsf/ocsf-schema#1723](https://github.com/ocsf/ocsf-schema/pull/1723); core-category vs public-extension placement under community discussion; v0.1.1 renames two objects and gates the core-object patch behind the profile in response to OCSF mappings-call feedback of 2026-08-20; v0.1.2 renames `security_zone` to `site_zone` after the 2026-09-08 community call — see [CHANGELOG](CHANGELOG.md))
+**v0.1.3 · draft · proposed to the OCSF community** (uid reservation: [ocsf/ocsf-schema#1723](https://github.com/ocsf/ocsf-schema/pull/1723); core-category vs public-extension placement under community discussion; v0.1.1 renames two objects and gates the core-object patch behind the profile in response to OCSF mappings-call feedback of 2026-08-20; v0.1.2 renames `security_zone` to `site_zone` after the 2026-09-08 community call — see [CHANGELOG](CHANGELOG.md))
 
 `physec` is an open event schema for physical security operations: access control decisions, alarm signals and their disposition, guard patrols, post staffing, response dispatch, and incident reports. As of v0.1 the required `incident_type_common` attribute is backed by a [published 25-value controlled vocabulary](vocabularies/incident_type_common.md) derived from a live production taxonomy.
 
