@@ -514,7 +514,7 @@ w("events/physical_access_activity.json", {
     "uid": 1,
     "caption": "Physical Access Activity",
     "category": CAT,
-    "description": "Physical Access Activity events report access control decisions and portal state changes. The activity set follows the ONVIF Access Control and Door Control service vocabularies, which separate the access decision from whether the portal was actually used. That separation is what makes tailgating and no-entry-made conditions expressible. The access decision itself, granted or denied, is an Authentication event (class 3002) carrying the <code>physical_site</code> profile; this class reports what happened at the portal after the decision.",
+    "description": "Physical Access Activity events report what happened at a portal: access outcomes and portal state changes. The activity set follows the ONVIF Access Control and Door Control service vocabularies, which separate the access decision from whether the portal was actually used. That separation is what makes tailgating and no-entry-made conditions expressible. The access decision itself, granted or denied, is an Authentication event (class 3002) carrying the <code>physical_site</code> profile; this class reports what happened at the portal after the decision.",
     "extends": "physical_security",
     "name": "physical_access_activity",
     "attributes": {
