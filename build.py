@@ -37,7 +37,7 @@ w("extension.json", {
     "caption": "Physical Security",
     "description": "The Physical Security extension defines event classes and objects for physical security operations, covering access control, alarm signalling and disposition, guard patrols, post staffing, response dispatch, and incident reporting. Event identifiers are crosswalked to established vocabularies including the SIA DC-03 format, the Ademco Contact ID protocol, ONVIF topic namespaces, and the ANSI/TMA AVS-01 alarm validation score.",
     "name": "physec",
-    "version": "0.1.3",
+    "version": "0.1.4",
 })
 
 w("categories.json", {
@@ -214,7 +214,7 @@ w("dictionary.json", {
         "is_antipassback_violated": {"caption": "Antipassback Violated", "description": "Indicates the presentation violated an antipassback rule.", "type": "boolean_t"},
 
         # --- zone / alarm point ---------------------------------------
-        "zone_type_id": {"caption": "Zone Type ID", "description": "The normalized classification of the zone. These are generic tiers by security posture. Regime-specific tiers map onto them rather than extending the list: for example, a DoD or DOE Controlled, Limited, or Protected Area maps to Restricted, and an Exclusion, Vital, or Material Access Area maps to Critical. Carry the native tier name in <code>zone_type</code>.", "type": "integer_t", "sibling": "zone_type", "enum": enum([
+        "site_zone_type_id": {"caption": "Site Zone Type ID", "description": "The normalized classification of the site zone by security posture. These are generic tiers by security posture. Regime-specific tiers map onto them rather than extending the list: for example, a DoD or DOE Controlled, Limited, or Protected Area maps to Restricted, and an Exclusion, Vital, or Material Access Area maps to Critical. Carry the native tier name in <code>site_zone_type</code>.", "type": "integer_t", "sibling": "site_zone_type", "references": [{"description": "DoD 5200.08-R, Physical Security Program: restricted areas (controlled, limited, exclusion)", "url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodm/520008rm.pdf"}, {"description": "10 CFR 73.2, NRC definitions: protected area, vital area, material access area", "url": "https://www.ecfr.gov/current/title-10/chapter-I/part-73/subpart-A/section-73.2"}], "enum": enum([
             (1, "Perimeter", "The outer boundary of the site."),
             (2, "Public", "An area open to the public."),
             (3, "Restricted", "An area restricted to authorized persons."),
@@ -222,7 +222,7 @@ w("dictionary.json", {
             (5, "Transitional", "A lobby, corridor, or other transitional space."),
             (6, "External", "An outdoor area within the site boundary."),
         ])},
-        "zone_type": {"caption": "Zone Type", "description": "The zone type, normalized to the caption of the <code>zone_type_id</code> value.", "type": "string_t"},
+        "site_zone_type": {"caption": "Site Zone Type", "description": "The site zone type, normalized to the caption of the <code>site_zone_type_id</code> value.", "type": "string_t"},
         "is_armed": {"caption": "Armed", "description": "Indicates the zone or point was armed at the time of the event.", "type": "boolean_t"},
         "sensor_type": {"caption": "Sensor Type", "description": "The detection technology of the monitored point, for example contact, motion, glassbreak, seismic, beam, fence, radar, or lidar.", "type": "string_t"},
 
@@ -364,8 +364,8 @@ w("objects/site_zone.json", {
     "name": "site_zone",
     "observable": 42003,
     "attributes": {
-        "zone_type_id": {"group": "classification", "requirement": "recommended"},
-        "zone_type": {"requirement": "optional"},
+        "site_zone_type_id": {"group": "classification", "requirement": "recommended"},
+        "site_zone_type": {"requirement": "optional"},
         "is_armed": {"requirement": "optional"},
         "location": {"requirement": "optional"},
     },
@@ -490,6 +490,7 @@ w("events/physical_security.json", {
     "name": "physical_security",
     "profiles": ["physical_site"],
     "attributes": {
+        "$include": ["profiles/physical_site.json"],
         "lifecycle_id": {"group": "classification", "requirement": "recommended"},
         "lifecycle": {"requirement": "optional"},
         "signal_code": {"group": "context", "requirement": "recommended"},
@@ -504,8 +505,8 @@ w("events/physical_security.json", {
         "response_type": {"requirement": "optional"},
         "site_zone": {"group": "context", "requirement": "recommended"},
         "location": {"group": "context", "requirement": "recommended"},
-        "device": {"group": "context", "requirement": "optional"},
-        "actor": {"group": "context", "requirement": "optional"},
+        "device": {"group": "context", "requirement": "optional", "profile": None},
+        "actor": {"group": "context", "requirement": "optional", "profile": None},
     },
 })
 
@@ -513,36 +514,33 @@ w("events/physical_access_activity.json", {
     "uid": 1,
     "caption": "Physical Access Activity",
     "category": CAT,
-    "description": "Physical Access Activity events report access control decisions and portal state changes. The activity set follows the ONVIF Access Control and Door Control service vocabularies, which separate the access decision from whether the portal was actually used. That separation is what makes tailgating and no-entry-made conditions expressible.",
+    "description": "Physical Access Activity events report access control decisions and portal state changes. The activity set follows the ONVIF Access Control and Door Control service vocabularies, which separate the access decision from whether the portal was actually used. That separation is what makes tailgating and no-entry-made conditions expressible. The access decision itself, granted or denied, is an Authentication event (class 3002) carrying the <code>physical_site</code> profile; this class reports what happened at the portal after the decision.",
     "extends": "physical_security",
     "name": "physical_access_activity",
     "attributes": {
         "activity_id": {"enum": enum([
-            (1, "Access Granted", "Access was authorized. Equivalent to ONVIF AccessGranted, SIA DG, and Contact ID 422."),
-            (2, "Access Denied", "Access was refused. Equivalent to ONVIF Denied, SIA DD or DK, and Contact ID 421."),
-            (3, "Access Taken", "Access was authorized and the portal was used. Equivalent to ONVIF AccessTaken."),
-            (4, "Access Not Taken", "Access was authorized but the portal was not used. Equivalent to ONVIF AccessNotTaken."),
-            (5, "Portal Forced", "The portal was opened without an access request. Equivalent to ONVIF DoorForcedOpen, SIA DF, and Contact ID 423."),
-            (6, "Portal Held Open", "The portal remained open beyond its configured threshold. Equivalent to ONVIF DoorOpenTooLong, SIA DN, and Contact ID 426."),
-            (7, "Request To Exit", "An egress request was registered. Equivalent to SIA DX and Contact ID 425."),
-            (8, "Duress", "A duress credential or code was presented. Equivalent to ONVIF Duress, SIA HA, and Contact ID 121 or 434."),
-            (9, "Antipassback Violation", "The presentation violated an antipassback rule. Equivalent to SIA DI."),
-            (10, "Tailgate", "More persons transited than were authorized. This condition is not directly observable and is always inferred; the derivation attribute is required."),
-            (11, "Portal Mode Changed", "The commanded state of the portal changed."),
-            (12, "Tamper", "The portal, reader, or its enclosure was tampered with. Equivalent to SIA TA and Contact ID 137 or 144."),
+            (1, "Access Taken", "Access was authorized and the portal was used. Equivalent to ONVIF AccessTaken."),
+            (2, "Access Not Taken", "Access was authorized but the portal was not used. Equivalent to ONVIF AccessNotTaken."),
+            (3, "Portal Forced", "The portal was opened without an access request. Equivalent to ONVIF DoorForcedOpen, SIA DF, and Contact ID 423."),
+            (4, "Portal Held Open", "The portal remained open beyond its configured threshold. Equivalent to ONVIF DoorOpenTooLong, SIA DN, and Contact ID 426."),
+            (5, "Request To Exit", "An egress request was registered. Equivalent to SIA DX and Contact ID 425."),
+            (6, "Duress", "A duress credential or code was presented. Equivalent to ONVIF Duress, SIA HA, and Contact ID 121 or 434."),
+            (7, "Antipassback Violation", "The presentation violated an antipassback rule. Equivalent to SIA DI."),
+            (8, "Tailgate", "More persons transited than were authorized. This condition is not directly observable and is always inferred; the derivation attribute is required."),
+            (9, "Portal Mode Changed", "The commanded state of the portal changed."),
+            (10, "Tamper", "The portal, reader, or its enclosure was tampered with. Equivalent to SIA TA and Contact ID 137 or 144."),
         ])},
         "portal": {"group": "primary", "requirement": "required"},
         "physical_credential": {"group": "primary", "requirement": "recommended"},
         "held_open_duration": {"requirement": "optional"},
     },
-    "constraints": {"at_least_one": ["portal", "physical_credential"]},
 })
 
 w("events/alarm_signal_activity.json", {
     "uid": 2,
     "caption": "Alarm Signal Activity",
     "category": CAT,
-    "description": "Alarm Signal Activity events report signals received from intrusion, environmental, and supervisory detection points. The event type describes what kind of condition was reported; the lifecycle attribute inherited from the base class describes the state transition, mirroring the modifier letter in the SIA DC-03 format and the qualifier field in the Ademco Contact ID protocol. Restore and trouble conditions are therefore not separate activities.",
+    "description": "Alarm Signal Activity events report signals received from intrusion, environmental, and supervisory detection points. The event type describes what kind of condition was reported; the lifecycle attribute inherited from the base class describes the state transition, mirroring the modifier letter in the SIA DC-03 format and the qualifier field in the Ademco Contact ID protocol. Restore and trouble conditions are therefore not separate activities. Opening and Closing apply to an area or partition rather than to a point: carry the area in <code>site_zone</code>, whose <code>is_armed</code> attribute records the resulting state, and name an <code>alarm_point</code> only when the arming device itself is known.",
     "extends": "physical_security",
     "name": "alarm_signal_activity",
     "attributes": {
@@ -559,8 +557,9 @@ w("events/alarm_signal_activity.json", {
             (10, "Closing", "The zone or partition was armed. Equivalent to SIA CL and Contact ID 400."),
             (11, "Video Analytic", "A video analytic rule was triggered. Equivalent to an ONVIF RuleEngine topic."),
         ])},
-        "alarm_point": {"group": "primary", "requirement": "required"},
+        "alarm_point": {"group": "primary", "requirement": "recommended"},
     },
+    "constraints": {"at_least_one": ["alarm_point", "site_zone"]},
 })
 
 w("events/alarm_disposition_activity.json", {
@@ -666,13 +665,13 @@ w("events/response_activity.json", {
     },
 })
 
-w("events/incident_report_activity.json", {
+w("events/physical_report_activity.json", {
     "uid": 7,
-    "caption": "Incident Report Activity",
+    "caption": "Physical Report Activity",
     "category": CAT,
-    "description": "Incident Report Activity events report the lifecycle of a documented incident. Classification follows the dual-coding pattern established by the Emergency Incident Data Document: a required common type drawn from a published controlled vocabulary, alongside the reporting organization's own internal type. Optional crosswalk attributes carry the equivalent public safety and offense codes where the incident maps to them.",
+    "description": "Physical Report Activity events report the lifecycle of a report written by security personnel about an incident or condition observed at a site. The report is the initiating record created by the reporting organization, not an analytical finding. Classification follows the dual-coding pattern established by the Emergency Incident Data Document: a required common type drawn from a published controlled vocabulary, alongside the reporting organization's own internal type. Optional crosswalk attributes carry the equivalent public safety and offense codes where the incident maps to them.",
     "extends": "physical_security",
-    "name": "incident_report_activity",
+    "name": "physical_report_activity",
     "attributes": {
         "activity_id": {"enum": enum([
             (1, "Created", "An incident report was opened."),

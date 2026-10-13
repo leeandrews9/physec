@@ -2,7 +2,7 @@
   "name": "incident_type_common",
   "caption": "Common Incident Type",
   "version": "0.1.1",
-  "description": "The controlled vocabulary for the incident_type_common attribute of Incident Report Activity (4230007). Values are append-only; renaming or removing a value is a breaking change. Crosswalk fields (apco_code, nibrs_code, nfirs_code) are structurally present but null in v0.1: they will be populated from licensed copies of APCO/NENA ANS 2.103.2, NIBRS, and NFIRS 700-series and marked verified per value in a minor release. Derived from a live 44-flag operational taxonomy running in production; see incident_type_common.md for guidance on borderline cases.",
+  "description": "The controlled vocabulary for the incident_type_common attribute of Physical Report Activity (4230007). Values are append-only; renaming or removing a value is a breaking change. Crosswalk fields (apco_code, nibrs_code, nfirs_code) are structurally present but null in v0.1: they will be populated from licensed copies of APCO/NENA ANS 2.103.2, NIBRS, and NFIRS 700-series and marked verified per value in a minor release. Derived from a live 44-flag operational taxonomy running in production; see incident_type_common.md for guidance on borderline cases.",
   "values": {
     "suspicious_activity": {
       "caption": "Suspicious Activity",

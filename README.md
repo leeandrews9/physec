@@ -60,7 +60,7 @@ So the layer where a security operation actually runs — *what was reported, wh
 | 4230004 | **Patrol Activity** | **No standard exists at all** |
 | 4230005 | **Post Staffing Activity** | **No standard exists at all** |
 | 4230006 | **Response Activity** | **No standard exists at all** |
-| 4230007 | Incident Report Activity | Partial — EIDD pattern adopted |
+| 4230007 | Physical Report Activity | Partial — EIDD pattern adopted |
 
 **Ten objects:** `portal`, `physical_credential`, `site_zone`, `alarm_point`, `post`, `checkpoint`, `patrol_tour`, `response_resource`, `disposition_details`, `signal_code`. Core OCSF `location`, `device`, `user`, `ldap_person`, `organization`, and `actor` are reused rather than duplicated; `location` gains site/building/floor context only when the `physical_site` profile is applied — no unconditional core patch.
 

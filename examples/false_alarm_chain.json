@@ -13,7 +13,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.3",
+      "version": "0.1.4",
       "profiles": [
         "physical_site"
       ],
@@ -36,7 +36,7 @@
       "site_zone": {
         "uid": "Z-PERIM-W",
         "name": "West perimeter",
-        "zone_type_id": 1
+        "site_zone_type_id": 1
       }
     },
     "message": "Perimeter beam activation, west fence segment 3."
@@ -54,7 +54,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.3",
+      "version": "0.1.4",
       "profiles": [
         "physical_site"
       ],
@@ -89,7 +89,7 @@
         "name": "Reference Emitter",
         "vendor_name": "physec"
       },
-      "version": "0.1.3",
+      "version": "0.1.4",
       "profiles": [
         "physical_site"
       ],

@@ -5,11 +5,11 @@
   "name": "site_zone",
   "observable": 42003,
   "attributes": {
-    "zone_type_id": {
+    "site_zone_type_id": {
       "group": "classification",
       "requirement": "recommended"
     },
-    "zone_type": {
+    "site_zone_type": {
       "requirement": "optional"
     },
     "is_armed": {

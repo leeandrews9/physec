@@ -393,11 +393,21 @@
       "description": "Indicates the presentation violated an antipassback rule.",
       "type": "boolean_t"
     },
-    "zone_type_id": {
-      "caption": "Zone Type ID",
-      "description": "The normalized classification of the zone. These are generic tiers by security posture. Regime-specific tiers map onto them rather than extending the list: for example, a DoD or DOE Controlled, Limited, or Protected Area maps to Restricted, and an Exclusion, Vital, or Material Access Area maps to Critical. Carry the native tier name in <code>zone_type</code>.",
+    "site_zone_type_id": {
+      "caption": "Site Zone Type ID",
+      "description": "The normalized classification of the site zone by security posture. These are generic tiers by security posture. Regime-specific tiers map onto them rather than extending the list: for example, a DoD or DOE Controlled, Limited, or Protected Area maps to Restricted, and an Exclusion, Vital, or Material Access Area maps to Critical. Carry the native tier name in <code>site_zone_type</code>.",
       "type": "integer_t",
-      "sibling": "zone_type",
+      "sibling": "site_zone_type",
+      "references": [
+        {
+          "description": "DoD 5200.08-R, Physical Security Program: restricted areas (controlled, limited, exclusion)",
+          "url": "https://www.esd.whs.mil/Portals/54/Documents/DD/issuances/dodm/520008rm.pdf"
+        },
+        {
+          "description": "10 CFR 73.2, NRC definitions: protected area, vital area, material access area",
+          "url": "https://www.ecfr.gov/current/title-10/chapter-I/part-73/subpart-A/section-73.2"
+        }
+      ],
       "enum": {
         "1": {
           "caption": "Perimeter",
@@ -425,9 +435,9 @@
         }
       }
     },
-    "zone_type": {
-      "caption": "Zone Type",
-      "description": "The zone type, normalized to the caption of the <code>zone_type_id</code> value.",
+    "site_zone_type": {
+      "caption": "Site Zone Type",
+      "description": "The site zone type, normalized to the caption of the <code>site_zone_type_id</code> value.",
       "type": "string_t"
     },
     "is_armed": {

@@ -1,10 +1,10 @@
 {
   "uid": 7,
-  "caption": "Incident Report Activity",
+  "caption": "Physical Report Activity",
   "category": "physical_security",
-  "description": "Incident Report Activity events report the lifecycle of a documented incident. Classification follows the dual-coding pattern established by the Emergency Incident Data Document: a required common type drawn from a published controlled vocabulary, alongside the reporting organization's own internal type. Optional crosswalk attributes carry the equivalent public safety and offense codes where the incident maps to them.",
+  "description": "Physical Report Activity events report the lifecycle of a report written by security personnel about an incident or condition observed at a site. The report is the initiating record created by the reporting organization, not an analytical finding. Classification follows the dual-coding pattern established by the Emergency Incident Data Document: a required common type drawn from a published controlled vocabulary, alongside the reporting organization's own internal type. Optional crosswalk attributes carry the equivalent public safety and offense codes where the incident maps to them.",
   "extends": "physical_security",
-  "name": "incident_report_activity",
+  "name": "physical_report_activity",
   "attributes": {
     "activity_id": {
       "enum": {

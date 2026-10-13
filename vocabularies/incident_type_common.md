@@ -1,7 +1,7 @@
 # incident_type_common — controlled vocabulary
 
 **Version 0.1.1 · Published** · the vocabulary behind the required
-`incident_type_common` attribute of Incident Report Activity (4230007).
+`incident_type_common` attribute of Physical Report Activity (4230007).
 Machine-readable form: [`incident_type_common.json`](incident_type_common.json).
 
 **Governance:** values are append-only. Renaming or removing a value is a
