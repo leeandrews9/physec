@@ -674,13 +674,13 @@ w("events/physical_report_activity.json", {
     "name": "physical_report_activity",
     "attributes": {
         "activity_id": {"enum": enum([
-            (1, "Created", "An incident report was opened."),
-            (2, "Updated", "An existing incident report was amended."),
+            (1, "Created", "A report was opened."),
+            (2, "Updated", "An existing report was amended."),
             (3, "Submitted", "The report was submitted for review."),
             (4, "Approved", "The report was approved by a supervisor."),
-            (5, "Closed", "The incident was closed."),
-            (6, "Reopened", "A closed incident was reopened."),
-            (7, "Referred", "The incident was referred to a public safety agency or to the client."),
+            (5, "Closed", "The report was closed."),
+            (6, "Reopened", "A closed report was reopened."),
+            (7, "Referred", "The report was referred to a public safety agency or to the client."),
         ])},
         "incident_type_common": {"group": "primary", "requirement": "required"},
         "incident_type_internal": {"group": "primary", "requirement": "recommended"},

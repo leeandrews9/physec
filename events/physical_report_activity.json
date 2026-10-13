@@ -10,11 +10,11 @@
       "enum": {
         "1": {
           "caption": "Created",
-          "description": "An incident report was opened."
+          "description": "A report was opened."
         },
         "2": {
           "caption": "Updated",
-          "description": "An existing incident report was amended."
+          "description": "An existing report was amended."
         },
         "3": {
           "caption": "Submitted",
@@ -26,15 +26,15 @@
         },
         "5": {
           "caption": "Closed",
-          "description": "The incident was closed."
+          "description": "The report was closed."
         },
         "6": {
           "caption": "Reopened",
-          "description": "A closed incident was reopened."
+          "description": "A closed report was reopened."
         },
         "7": {
           "caption": "Referred",
-          "description": "The incident was referred to a public safety agency or to the client."
+          "description": "The report was referred to a public safety agency or to the client."
         }
       }
     },
