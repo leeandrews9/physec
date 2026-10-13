@@ -1,13 +1,13 @@
 {
   "caption": "Geo Location",
-  "description": "Adds physical site context to the core Geo Location object when the Physical Site profile is applied.",
+  "description": "Adds physical site context to the core Geo Location object when the Physical Site profile is applied. With the profile applied, <code>site_uid</code> alone satisfies the object's at-least-one constraint, so an indoor reader, checkpoint, or device need not carry geographic attributes.",
   "extends": "location",
   "profiles": [
     "physical_site"
   ],
   "attributes": {
     "site_uid": {
-      "requirement": "optional"
+      "requirement": "recommended"
     },
     "site_name": {
       "requirement": "optional"
@@ -18,5 +18,14 @@
     "floor": {
       "requirement": "optional"
     }
+  },
+  "constraints": {
+    "at_least_one": [
+      "city",
+      "country",
+      "postal_code",
+      "region",
+      "site_uid"
+    ]
   }
 }

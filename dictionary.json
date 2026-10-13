@@ -581,11 +581,6 @@
         }
       }
     },
-    "resource_type": {
-      "caption": "Resource Type",
-      "description": "The resource type, normalized to the caption of the <code>resource_type_id</code> value.",
-      "type": "string_t"
-    },
     "assigned_time": {
       "caption": "Assigned Time",
       "description": "The time the resource was assigned to the event.",

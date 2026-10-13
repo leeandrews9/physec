@@ -259,7 +259,6 @@ w("dictionary.json", {
             (8, "Fire Or EMS", "A public fire or emergency medical service."),
             (9, "Client Contact", "A representative of the client organization."),
         ])},
-        "resource_type": {"caption": "Resource Type", "description": "The resource type, normalized to the caption of the <code>resource_type_id</code> value.", "type": "string_t"},
         "assigned_time": {"caption": "Assigned Time", "description": "The time the resource was assigned to the event.", "type": "timestamp_t"},
         "enroute_time": {"caption": "En Route Time", "description": "The time the resource began travelling to the location.", "type": "timestamp_t"},
         "on_scene_time": {"caption": "On Scene Time", "description": "The time the resource arrived at the location.", "type": "timestamp_t"},
@@ -467,15 +466,16 @@ w("objects/disposition_details.json", {
 # patch to a core object (OCSF mappings-call guidance, 2026-08-20).
 w("objects/location.json", {
     "caption": "Geo Location",
-    "description": "Adds physical site context to the core Geo Location object when the Physical Site profile is applied.",
+    "description": "Adds physical site context to the core Geo Location object when the Physical Site profile is applied. With the profile applied, <code>site_uid</code> alone satisfies the object's at-least-one constraint, so an indoor reader, checkpoint, or device need not carry geographic attributes.",
     "extends": "location",
     "profiles": ["physical_site"],
     "attributes": {
-        "site_uid": {"requirement": "optional"},
+        "site_uid": {"requirement": "recommended"},
         "site_name": {"requirement": "optional"},
         "building": {"requirement": "optional"},
         "floor": {"requirement": "optional"},
     },
+    "constraints": {"at_least_one": ["city", "country", "postal_code", "region", "site_uid"]},
 })
 
 # ---------------------------------------------------------------- events
